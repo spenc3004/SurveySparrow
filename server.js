@@ -35,9 +35,6 @@ app.post("/ss", async (req, res) => {
         fs.unlinkSync(docxFilePath);
 
         res.status(200).send('File processed and email sent.');
-
-
-        res.send(data)
     }
 
     catch (error) {
@@ -67,7 +64,7 @@ function generateHTML(data) {
             ${data.companyAddress}<br>
             ${data.companyAddress2}<br>
             ${data.companyCity}, ${data.companyState} ${data.companyZip}<br>
-            “Insert Call to Action” Based on Q4
+            “Insert Call to Action” Based on Q4<br>
             Call Today to Schedule Your Appointment! 
             OR Call Today or Conveniently Schedule Online! 
             OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment! (Q4)
@@ -135,7 +132,8 @@ function generateHTML(data) {
                     <td>${data.radiusOffers.disclaimer8}</td>
                 </tr>
             </table>
-            New Homeowner Mailings: ${data.homeOwner}</p>
+            ${JSON.parse(data.homeOwner) ? `
+               New Homeowner Mailings:</p>
             <p><strong><u>COUPONS(There are "4" coupons):</u></strong><br>           <table>
                 <tr>
                     <th>Coupon</th>
@@ -173,9 +171,9 @@ function generateHTML(data) {
                     <td>${data.radiusOffers.coupon8}</td>
                     <td>${data.radiusOffers.disclaimer8}</td>
                 </tr>
-            </table></p>
-
-
+            </table></p> 
+                
+            ` : ``}
         </body>
     </body>
     
@@ -183,7 +181,7 @@ function generateHTML(data) {
     // #endregion 
 }
 
-
+`            `
 function convertToDocx(htmlFilePath, docxFilePath) {
     // #region Convert output.html to a docx
     return new Promise((resolve, reject) => {
