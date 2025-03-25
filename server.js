@@ -31,8 +31,8 @@ app.post("/ss", async (req, res) => {
         await convertToDocx(htmlFilePath, docxFilePath);
         await sendEmail(docxFilePath);
 
-        //fs.unlinkSync(htmlFilePath);
-        //fs.unlinkSync(docxFilePath);
+        fs.unlinkSync(htmlFilePath);
+        fs.unlinkSync(docxFilePath);
 
         res.status(200).send('File processed and email sent.');
 
@@ -55,7 +55,7 @@ function generateHTML(data) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Generated Document</title>
+        <title>HVAC Brief</title>
     </head>
     
     <body>
@@ -201,16 +201,23 @@ function convertToDocx(htmlFilePath, docxFilePath) {
 
 async function sendEmail(attachmentPath) {
     // #region Send output.docx in email
+
     let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: { user: process.env.user, pass: process.env.pass }
+        host: 'smtp.office365.com',
+        port: 587,
+        secure: false,
+        auth: { user: process.env.user, pass: process.env.pass },
+        tls: {
+            ciphers: "SSLv3" // Helps avoid connection issues
+        }
+
     });
 
     let mailOptions = {
         from: process.env.user,
         to: process.env.recipient,
-        subject: 'Generated Document',
-        text: 'Please find the attached document.',
+        subject: 'New HVAC Survey Submitted',
+        text: 'Please see the attached document.',
         attachments: [{ path: attachmentPath }]
     };
 
