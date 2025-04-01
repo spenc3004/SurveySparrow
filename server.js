@@ -97,10 +97,7 @@ function generateHTML(data) {
             ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p> ` : ``}
 
             <h5><u>LOCATION INFORMATION:</u></h5>
-            ${data.companyName}<br>
-            ${data.companyAddress}<br>
-            ${data.companyAddress2}<br>
-            ${data.companyCity}, ${data.companyState} ${data.companyZip}<br><br>
+            ${data.companyName}<br><br>
             ${phone}<br><br>
             ${data.website}<br><br>
             ${data.license}
