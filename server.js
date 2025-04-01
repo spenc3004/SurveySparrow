@@ -67,7 +67,7 @@ function generateHTML(data) {
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View BBB Logo</i></u></a>`)
         .join("<br>");
 
-    const phone = `(${data.companyPhone.slice(3, 6)})-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
+    const phone = `(${data.companyPhone.slice(3, 6)}) ${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
     function numCoupons() {
         counter = 0
@@ -115,15 +115,15 @@ function generateHTML(data) {
             ${data.technicians}<br>
             ${data.financing}
             <h5><u>TAGLINES:</u></h5>
-            ${data.taglines.tagline1}<br>
-            ${data.taglines.tagline2}<br>
-
+            ${data.hasTaglines === "true" ? `${data.customTaglines.tagline1}<br>
+            ${data.customTaglines.tagline2}<br>` : ``}
+            ${data.premadeTaglines !== "null" ? `${data.premadeTaglines.split(",").join("<br>")}` : ``}
             <h5><u>RATINGS:</u></h5>
-            Google: ${data.stars.google}<br>
-            ${data.stars.other1}<br>
-            ${data.stars.other2}<br>
-            ${data.stars.other3}<br>
-            ${data.stars.other4}
+            ${data.stars.google !== "null" ? `Google: ${data.stars.google}<br>` : ``}
+            ${data.stars.other1 !== "null" ? `${data.stars.other1}<br>` : ``}
+            ${data.stars.other2 !== "null" ? `${data.stars.other2}<br>` : ``}
+            ${data.stars.other3 !== "null" ? `${data.stars.other3}<br>` : ``}
+            ${data.stars.other4 !== "null" ? `${data.stars.other4}` : ``}
             <h5><u>LOGOs to Use:</u></h5> 
             ${!data.logo ? `` : `${logoLinks}<br>`}
             ${!data.bbb ? `` : `${bbbLinks}<br>`}
