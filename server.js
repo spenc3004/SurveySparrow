@@ -142,8 +142,9 @@ function generateHvacHTML(data) {
             ${data.sameDayService}<br>
             ${data.approveFirst}
             <h5><u>TAGLINES:</u></h5>
-            ${data.tagline1 !== "null" ? `${data.tagline1}<br>` : ``}
-            ${data.taglines !== "null" ? `${data.taglines.split(",").join("<br>")}` : ``}
+            ${data.hasTaglines === "true" ? `${data.customTaglines.tagline1}<br>
+            ${data.customTaglines.tagline2}<br>` : ``}
+            ${data.premadeTaglines !== "null" ? `${data.premadeTaglines.split(",").join("<br>")}` : ``}
             <h5><u>RATINGS:</u></h5>
             ${data.stars.google !== "null" ? `Google: ${data.stars.google}<br>` : ``}
             ${data.stars.other1 !== "null" ? `${data.stars.other1}<br>` : ``}
@@ -298,9 +299,9 @@ function generateAutoHTML(data) {
             ${data.technicians}<br>
             ${data.financing}
             <h5><u>TAGLINES:</u></h5>
-            ${data.hasTaglines === "true" ? `${data.customTaglines.tagline1}<br>
-            ${data.customTaglines.tagline2}<br>` : ``}
-            ${data.premadeTaglines !== "null" ? `${data.premadeTaglines.split(",").join("<br>")}` : ``}
+            ${data.tagline1 !== "null" ? `${data.tagline1}<br>` : ``}
+            ${data.taglines !== "null" ? `${data.taglines.split(",").join("<br>")}` : ``}
+           
             <h5><u>RATINGS:</u></h5>
             ${data.stars.google !== "null" ? `Google: ${data.stars.google}<br>` : ``}
             ${data.stars.other1 !== "null" ? `${data.stars.other1}<br>` : ``}
