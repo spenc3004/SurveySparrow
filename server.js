@@ -131,16 +131,12 @@ function generateHvacHTML(data) {
                 OR Call Today or Conveniently Schedule Online! <br>
                 OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!`}
             <h5><u>PHOTOS TO USE:</u></h5>
-            ${data.vehicles}
             ${photoLinks}
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
-            ${data.aseTechnicians}<br>
+            ${data.pricing}<br>
             ${data.warranties}<br>
-            ${data.shuttleLoanerService}<br>
-            ${data.financing}<br>
-            ${data.amenities}<br>
-            ${data.sameDayService}<br>
-            ${data.approveFirst}
+            ${data.technicians}<br>
+            ${data.financing}
             <h5><u>TAGLINES:</u></h5>
             ${data.hasTaglines === "true" ? `${data.customTaglines.tagline1}<br>
             ${data.customTaglines.tagline2}<br>` : ``}
@@ -294,14 +290,16 @@ function generateAutoHTML(data) {
             <h5><u>SERVICES:</u></h5>
             ${data.services.split(",").join("<br>")}
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
-            ${data.pricing}<br>
+            ${data.aseTechnicians}<br>
             ${data.warranties}<br>
-            ${data.technicians}<br>
-            ${data.financing}
+            ${data.shuttleLoanerService}<br>
+            ${data.financing}<br>
+            ${data.amenities}<br>
+            ${data.sameDayService}<br>
+            ${data.approveFirst}
             <h5><u>TAGLINES:</u></h5>
             ${data.tagline1 !== "null" ? `${data.tagline1}<br>` : ``}
             ${data.taglines !== "null" ? `${data.taglines.split(",").join("<br>")}` : ``}
-           
             <h5><u>RATINGS:</u></h5>
             ${data.stars.google !== "null" ? `Google: ${data.stars.google}<br>` : ``}
             ${data.stars.other1 !== "null" ? `${data.stars.other1}<br>` : ``}
