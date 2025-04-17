@@ -125,7 +125,7 @@ function generateHvacHTML(data) {
             ${data.companyName}<br><br>
             ${phone}<br><br>
             ${data.website}<br><br>
-            ${data.license}
+            ${data.license !== "null" ? `${data.license}` : ``}
             ${data.onlineService === "true" ? `<p>Call Today to Schedule Your Appointment!</p>` : `
                 <p><strong>“Insert Call to Action” Based on Q4</strong></p>
                 OR Call Today or Conveniently Schedule Online! <br>
@@ -138,8 +138,10 @@ function generateHvacHTML(data) {
             ${data.technicians}<br>
             ${data.financing}
             <h5><u>TAGLINES:</u></h5>
-            ${data.hasTaglines === "true" ? `${data.customTaglines.tagline1}<br>
-            ${data.customTaglines.tagline2}<br>` : ``}
+            ${data.hasTaglines === "true" ?
+            `${data.customTaglines.tagline1 !== "null" ? `${data.customTaglines.tagline1}<br>` : ``}
+                ${data.customTaglines.tagline2 !== "null" ? `${data.customTaglines.tagline2}<br>` : ``}`
+            : ``}
             ${data.premadeTaglines !== "null" ? `${data.premadeTaglines.split(",").join("<br>")}` : ``}
             <h5><u>RATINGS:</u></h5>
             ${data.stars.google !== "null" ? `Google: ${data.stars.google}<br>` : ``}
@@ -148,13 +150,12 @@ function generateHvacHTML(data) {
             ${data.stars.other3 !== "null" ? `${data.stars.other3}<br>` : ``}
             <h5><u>LOGOs to Use:</u></h5> 
             ${!data.logo ? `` : `${logoLinks}<br>`}
-            ${data.bbb !== "" ? `<p>BBB Logo: ${data.bbb}</p><br>` : ``}
             ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
+            ${data.bbb !== "" ? `<p>BBB Logo: ${data.bbb}</p><br>` : ``}
             ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
             ${data.otherAwards.split(",").join("<br>")}` : ``}
             <h5><u>OTHER NOTES:</u></h5> 
             ${data.applicables}
-           
             ${JSON.parse(data.homeOwner) ? `
                 <h6>New Home Owner mailings?</h6> Yes
                 <h6>Radius Offers: </h6>
