@@ -23,13 +23,32 @@ const bbbImageMap = {
     "Vertical blue and white with no A": "https://www.themailshark.com/prepress/surveysparrow/hs_bbb/Vertical%20blue%20and%20white%20no%20A.ai"
 }
 
+const aaaImageMap = {
+    "Red and blue": "https://www.themailshark.com/prepress/surveysparrow/auto/aaa/Red%20and%20blue.ai",
+    "Black and white": "https://www.themailshark.com/prepress/surveysparrow/auto/aaa/Black%20and%20white.ai"
+}
+
+const napaImageMap = {
+    "Black and yellow with AUTOCARE CENTER": "https://www.themailshark.com/prepress/surveysparrow/auto/napa/Black%20and%20yellow%20with%20AUTOCARE%20CENTER.ai",
+    "Blue and yellow with AUTOCARE CENTER": "https://www.themailshark.com/prepress/surveysparrow/auto/napa/Blue%20and%20yellow%20with%20AUTOCARE%20CENTER.ai",
+    "Blue and white with yellow border": "https://www.themailshark.com/prepress/surveysparrow/auto/napa/Blue%20and%20white%20with%20yellow%20border.ai",
+    "Black and white NAPA": "https://www.themailshark.com/prepress/surveysparrow/auto/napa/Black%20and%20white%20NAPA.ai",
+    "Blue and yellow NAPA": "https://www.themailshark.com/prepress/surveysparrow/auto/napa/Blue%20and%20yellow%20NAPA.ai"
+
+}
+
+const caOrTxImageMap = {
+    "CA STAR Certified": "https://www.themailshark.com/prepress/surveysparrow/auto/states/CA%20Star%20Certified.ai",
+    "TX Offical Vehicle Inspection": "https://www.themailshark.com/prepress/surveysparrow/auto/states/TX%20Official%20Vehical%20Inspection.jpg"
+}
+
 app.get("/", (req, res) => {
     res.send('Hello from server.js')
 })
 
 
 app.post("/hvac", async (req, res) => {
-    // #region Receive JSON from Survey Sparrow
+    // #region Receive HVAC JSON from Survey Sparrow
     try {
         const data = req.body
         const company = data.companyName
@@ -104,32 +123,32 @@ function generateHvacHTML(data) {
             ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p> ` : ``}
 
             <h5><u>LOCATION INFORMATION:</u></h5>
-            ${data.companyName}<br><br>
-            ${phone}<br><br>
-            ${data.website}<br><br>
-            ${data.license !== "null" ? `${data.license}` : ``}
+            <p>${data.companyName}</p>
+            <p>${phone}</p>
+            <p>${data.website}</p>
+            ${data.license !== "null" ? `<p>${data.license}</p>` : ``}
             ${data.onlineService === "true" ? `<p>Call Today to Schedule Your Appointment!</p>` : `
                 <p><strong>“Insert Call to Action” Based on Q4</strong></p>
-                OR Call Today or Conveniently Schedule Online! <br>
-                OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!`}
+                <p>OR Call Today or Conveniently Schedule Online!</p>
+                <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
             <h5><u>PHOTOS TO USE:</u></h5>
             ${photoLinks}
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
-            ${data.pricing}<br>
-            ${data.warranties}<br>
-            ${data.technicians}<br>
-            ${data.financing}
+            <p>${data.pricing}</p>
+            <p>${data.warranties}</p>
+            <p>${data.technicians}</p>
+            <p>${data.financing}</p>
             <h5><u>TAGLINES:</u></h5>
             ${data.hasTaglines === "true" ?
-            `${data.customTaglines.tagline1 !== "null" ? `${data.customTaglines.tagline1}<br>` : ``}
-                ${data.customTaglines.tagline2 !== "null" ? `${data.customTaglines.tagline2}<br>` : ``}`
+            `${data.customTaglines.tagline1 !== "null" ? `<p>${data.customTaglines.tagline1}</p>` : ``}
+                ${data.customTaglines.tagline2 !== "null" ? `<p>${data.customTaglines.tagline2}</p>` : ``}`
             : ``}
             ${data.premadeTaglines !== "null" ? `${data.premadeTaglines.split(",").join("<br>")}` : ``}
             <h5><u>RATINGS:</u></h5>
-            ${data.stars.google !== "null" ? `Google: ${data.stars.google}<br>` : ``}
-            ${data.stars.other1 !== "null" ? `${data.stars.other1}<br>` : ``}
-            ${data.stars.other2 !== "null" ? `${data.stars.other2}<br>` : ``}
-            ${data.stars.other3 !== "null" ? `${data.stars.other3}<br>` : ``}
+            ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
+            ${data.stars.other1 !== "null" ? `<p>${data.stars.other1}</p>` : ``}
+            ${data.stars.other2 !== "null" ? `<p>${data.stars.other2}</p>` : ``}
+            ${data.stars.other3 !== "null" ? `<p>${data.stars.other3}</p>` : ``}
             <h5><u>LOGOs to Use:</u></h5> 
             ${!data.logo ? `` : `${logoLinks}<br>`}
             ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
@@ -137,7 +156,7 @@ function generateHvacHTML(data) {
             ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
             ${data.otherAwards.split(",").join("<br>")}` : ``}
             <h5><u>OTHER NOTES:</u></h5> 
-            ${data.applicables}
+            <p>${data.applicables}</p>
             ${JSON.parse(data.homeOwner) ? `
                 <h6>New Home Owner mailings?</h6> Yes
                 <h6>Radius Offers: </h6>
@@ -194,7 +213,7 @@ function generateHvacHTML(data) {
 }
 
 app.post("/auto", async (req, res) => {
-    // #region Receive JSON from Survey Sparrow
+    // #region AUTO Receive JSON from Survey Sparrow
     try {
         const data = req.body
         const company = data.companyName
@@ -207,8 +226,8 @@ app.post("/auto", async (req, res) => {
         await convertToDocx(htmlFilePath, docxFilePath);
         await sendEmail(docxFilePath, company, type);
 
-        // fs.unlinkSync(htmlFilePath);
-        //fs.unlinkSync(docxFilePath);
+        fs.unlinkSync(htmlFilePath);
+        fs.unlinkSync(docxFilePath);
 
         res.status(200).send('File processed and email sent.');
     }
@@ -234,7 +253,7 @@ function generateAutoHTML(data) {
     // dynamically create "a" tags for award or logo photos
     const awardOrLogoLinks = data.awards
         .split(",")
-        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
@@ -268,51 +287,51 @@ function generateAutoHTML(data) {
             ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p> ` : ``}
 
             <h5><u>LOCATION INFORMATION:</u></h5>
-            ${data.companyName}<br><br>
-            ${data.companyAddress}<br><br>
-            ${data.companyAddress2 !== "null" ? `${data.companyAddress2}<br><br>` : ``}
-            ${data.companyCity}, ${data.companyState} ${data.companyZip}<br><br>
+            <p>${data.companyName}</p>
+            <p>${data.companyAddress}</p>
+            ${data.companyAddress2 !== "null" ? `<p>${data.companyAddress2}</p>` : ``}
+            <p>${data.companyCity}, ${data.companyState} ${data.companyZip}</p>
             ${data.onlineService === "true" ? `<p>Call Today to Schedule Your Appointment!</p>` : `
                 <p><strong>“Insert Call to Action” Based on Q4</strong></p>
-                OR Call Today or Conveniently Schedule Online! <br>
-                OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!`}
-            ${phone}<br><br>
-            ${data.website}<br><br>
-            <p>Hours:</p> <br />
-            ${data.hours.Monday !== "null" ? `${data.hours.Monday}<br>` : ``}
-            ${data.hours.Tuesday !== "null" ? `${data.hours.Tuesday}<br>` : ``}
-            ${data.hours.Wednesday !== "null" ? `${data.hours.Wednesday}<br>` : ``}
-            ${data.hours.Thursday !== "null" ? `${data.hours.Thursday}<br>` : ``}
-            ${data.hours.Friday !== "null" ? `${data.hours.Friday}<br>` : ``}
-            ${data.hours.Saturday !== "null" ? `${data.hours.Saturday}<br>` : ``}
-            ${data.hours.Sunday !== "null" ? `${data.hours.Sunday}<br>` : ``}
+                <p>OR Call Today or Conveniently Schedule Online! </p>
+                OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
+            <p>${phone}</p>
+            <p>${data.website}</p>
+            <p>Hours:</p>
+            ${data.hours.Monday !== "null" ? `<p>Monday: ${data.hours.Monday}</p>` : ``}
+            ${data.hours.Tuesday !== "null" ? `<p>Tuesday: ${data.hours.Tuesday}</p>` : ``}
+            ${data.hours.Wednesday !== "null" ? `<p>Wednesday: ${data.hours.Wednesday}</p>` : ``}
+            ${data.hours.Thursday !== "null" ? `<p>Thrusday: ${data.hours.Thursday}</p>` : ``}
+            ${data.hours.Friday !== "null" ? `<p>Friday: ${data.hours.Friday}</p>` : ``}
+            ${data.hours.Saturday !== "null" ? `<p>Saturday: ${data.hours.Saturday}</p>` : ``}
+            ${data.hours.Sunday !== "null" ? `<p>Sunday: ${data.hours.Sunday}</p>` : ``}
             <h5><u>PHOTOS TO USE:</u></h5>
-            ${data.vehicles}<br>
+            <p>${data.vehicles}</p>
             ${photoLinks}
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
-            ${data.aseTechnicians}<br>
-            ${data.warranties}<br>
-            ${data.shuttleLoanerService}<br>
-            ${data.financing}<br>
-            ${data.amenities}<br>
-            ${data.sameDayService}<br>
-            ${data.approveFirst === "true' ? `<p>All Repairs Approved by the Customer Prior to Work Being Done</p>` : ``}"}
+            <p>${data.aseTechnicians}</p>
+            <p>${data.warranties}</p>
+            <p>${data.shuttleLoanerService}</p>
+            <p>${data.financing}</p>
+            <p>${data.amenities}</p>
+            <p>${data.sameDayService}</p>
+            ${data.approveFirst === "true" ? `<p>All Repairs Approved by the Customer Prior to Work Being Done</p>` : ``}
             <h5><u>TAGLINES:</u></h5>
-            ${data.tagline1 !== "null" ? `${data.tagline1}<br>` : ``}
+            ${data.tagline1 !== "null" ? `<p>${data.tagline1}</p>` : ``}
             ${data.taglines !== "null" ? `${data.taglines.split(",").join("<br>")}` : ``}
             <h5><u>RATINGS & REVIEWS:</u></h5>
-            ${data.stars.google !== "null" ? `Google: ${data.stars.google}<br>` : ``}
-            ${data.stars.other1 !== "null" ? `${data.stars.other1}<br>` : ``}
-            ${data.stars.other2 !== "null" ? `${data.stars.other2}<br>` : ``}
-            ${data.stars.other3 !== "null" ? `${data.stars.other3}` : ``}
+            ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
+            ${data.stars.other1 !== "null" ? `<p>${data.stars.other1}</p>` : ``}
+            ${data.stars.other2 !== "null" ? `<p>${data.stars.other2}</p>` : ``}
+            ${data.stars.other3 !== "null" ? `<p>${data.stars.other3}</p>` : ``}
             <h5><u>SHOP LOGO:</u></h5> 
             ${!data.logo ? `` : `${logoLinks}`}
             <h5><u>AWARDS LOGOS:</u></h5>
             ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
-            ${data.bbb !== "" ? `<p>BBB Logo: ${data.bbb}</p><br>` : ``}
-            ${data.aaa !== "" ? `<p>AAA Logo: ${data.aaa}</p><br>` : ``}
-            ${data.napa !== "" ? `<p>NAPA Logo: ${data.napa}</p><br>` : ``}
-            ${data.caOrTx !== "" ? `<p>CA or TX Logo: ${data.caOrTx}</p><br>` : ``}
+            ${bbbImageMap[data.bbb] ? `<a href="${bbbImageMap[data.bbb]}" target="_blank"><u><i>View BBB Logo</i></u></a><br>` : ``}
+            ${aaaImageMap[data.aaa] ? `<a href="${aaaImageMap[data.aaa]}" target="_blank"><u><i>View AAA Logo</i></u></a><br>` : ``}
+            ${napaImageMap[data.napa] ? `<a href="${napaImageMap[data.napa]}" target="_blank"><u><i>View NAPA Logo</i></u></a><br>` : ``}
+            ${caOrTxImageMap[data.caOrTx] ? `<a href="${caOrTxImageMap[data.caOrTx]}" target="_blank"><u><i>View CA or TX Logo</i></u></a><br>` : ``}
             ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
             ${data.otherAwards.split(",").join("<br>")}` : ``}
             <h5><u>OTHER NOTES:</u></h5> 
@@ -375,6 +394,7 @@ function generateAutoHTML(data) {
 
 
 
+
 function convertToDocx(htmlFilePath, docxFilePath) {
     // #region Convert output.html to a docx
     return new Promise((resolve, reject) => {
@@ -407,7 +427,7 @@ async function sendEmail(attachmentPath, company, type) {
     let mailOptions = {
         from: process.env.user,
         to: process.env.recipient,
-        bcc: "sharkymailson@gmail.com",
+        //bcc: "sharkymailson@gmail.com",
         subject: `New ${type} Survey Submitted for ${company}`,
         text: 'Please see the attached document.',
         attachments: [{ path: attachmentPath }]
