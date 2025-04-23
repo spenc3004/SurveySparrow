@@ -20,7 +20,7 @@ const bbbImageMap = {
     "Horizontal blue and white": "https://www.themailshark.com/prepress/surveysparrow/hs_bbb/Horizontal%20blue%20and%20white.ai",
     "Vertical blue and white with blue A": "https://www.themailshark.com/prepress/surveysparrow/hs_bbb/Vertical%20blue%20and%20white%20with%20blue%20A.ai.ai",
     "Vertical blue and white with red A": "https://www.themailshark.com/prepress/surveysparrow/hs_bbb/Vertical%20blue%20and%20white%20with%20red%20A.ai",
-    "Vertical blue and white with no A": "https://www.themailshark.com/prepress/surveysparrow/hs_bbb/Vertical%20blue%20and%20white%20no%20A.ai"
+    "Vertical blue and white no A": "https://www.themailshark.com/prepress/surveysparrow/hs_bbb/Vertical%20blue%20and%20white%20no%20A.ai"
 }
 
 const aaaImageMap = {
@@ -132,7 +132,9 @@ function generateHvacHTML(data) {
                 <p>OR Call Today or Conveniently Schedule Online!</p>
                 <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
             <h5><u>PHOTOS TO USE:</u></h5>
-            ${photoLinks}
+            ${data.photos !== "" ? `${photoLinks}` : ``}
+            <h5><u>SERVICES:</u></h5>
+            ${data.services.split(",").join("<br>")}
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
             <p>${data.pricing}</p>
             <p>${data.warranties}</p>
