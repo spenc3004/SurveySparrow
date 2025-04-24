@@ -127,7 +127,7 @@ function generateHvacHTML(data) {
             <p>${phone}</p>
             <p>${data.website}</p>
             ${data.license !== "null" ? `<p>${data.license}</p>` : ``}
-            ${data.onlineService === "true" ? `<p>Call Today to Schedule Your Appointment!</p>` : `
+            ${data.onlineService !== "true" ? `<p>Call Today to Schedule Your Appointment!</p>` : `
                 <p><strong>“Insert Call to Action” Based on Q4</strong></p>
                 <p>OR Call Today or Conveniently Schedule Online!</p>
                 <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
