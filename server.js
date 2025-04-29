@@ -97,9 +97,30 @@ function generateHvacHTML(data) {
     // counts number of coupons in radiusOffers to then display in the HTML
     function numCoupons() {
         counter = 0
+        for (const key in data.homeownerOffers) {
+            if (key.startsWith("coupon")) {
+                if (data.homeownerOffers[key] !== "null") {
+                    counter += 1
+                }
+            }
+        }
         for (const key in data.radiusOffers) {
             if (key.startsWith("coupon")) {
                 if (data.radiusOffers[key] !== "null") {
+                    counter += 1
+                }
+            }
+        }
+        for (const key in data.carrierOffers) {
+            if (key.startsWith("coupon")) {
+                if (data.carrierOffers[key] !== "null") {
+                    counter += 1
+                }
+            }
+        }
+        for (const key in data.retentionOffers) {
+            if (key.startsWith("coupon")) {
+                if (data.retentionOffers[key] !== "null") {
                     counter += 1
                 }
             }
@@ -160,28 +181,23 @@ function generateHvacHTML(data) {
             <h5><u>OTHER NOTES:</u></h5> 
             <p>${data.applicables}</p>
             ${JSON.parse(data.homeOwner) ? `
-                <h6>New Home Owner mailings?</h6> Yes
-                <h6>Radius Offers: </h6>
+                <h6>New Homeowner mailings?</h6> Yes
+                <h6>Homeowners Offers: </h6>
                 <table>
                     <tr>
                         <th>Coupon</th>
                         <th>Disclaimer</th>
                     </tr>
-                    ${data.radiusOffers.coupon1 !== "null" ? `
+                    ${data.homeownerOffers.coupon1 !== "null" ? `
                     <tr>
-                        <td>${data.radiusOffers.coupon1}</td>
-                        <td>${data.radiusOffers.disclaimer1}</td>
+                        <td>${data.homeownerOffers.coupon1}</td>
+                        <td>${data.homeownerOffers.disclaimer1}</td>
                     </tr>`: ``}
-                    ${data.radiusOffers.coupon2 !== "null" ? `
+                    ${data.homeownerOffers.coupon2 !== "null" ? `
                     <tr>
-                        <td>${data.radiusOffers.coupon2}</td>
-                        <td>${data.radiusOffers.disclaimer2}</td>
+                        <td>${data.homeownerOffers.coupon2}</td>
+                        <td>${data.homeownerOffers.disclaimer2}</td>
                     </tr>`: ``}
-                    ${data.radiusOffers.coupon3 !== "null" ? `
-                        <tr>
-                            <td>${data.radiusOffers.coupon3}</td>
-                            <td>${data.radiusOffers.disclaimer3}</td>
-                        </tr>`: ``}
                 </table></p> 
               
             ` : ``}
@@ -193,19 +209,89 @@ function generateHvacHTML(data) {
                     </tr>
                     ${data.radiusOffers.coupon1 !== "null" ? `
                     <tr>
-                        <td>${data.radiusOffers.coupon1}</td>
+                        <td>(RADIUS OFFER) ${data.radiusOffers.coupon1}</td>
                         <td>${data.radiusOffers.disclaimer1}</td>
                     </tr>`: ``}
                     ${data.radiusOffers.coupon2 !== "null" ? `
                     <tr>
-                        <td>${data.radiusOffers.coupon2}</td>
+                        <td>(RADIUS OFFER) ${data.radiusOffers.coupon2}</td>
                         <td>${data.radiusOffers.disclaimer2}</td>
                     </tr>`: ``}
                     ${data.radiusOffers.coupon3 !== "null" ? `
                     <tr>
-                        <td>${data.radiusOffers.coupon3}</td>
+                        <td>(RADIUS OFFER) ${data.radiusOffers.coupon3}</td>
                         <td>${data.radiusOffers.disclaimer3}</td>
                     </tr>`: ``}
+                    ${data.homeownerOffers.coupon1 !== "null" ? `
+                        <tr>
+                            <td>(NEW HOMEOWNER OFFER) ${data.homeownerOffers.coupon1}</td>
+                            <td>${data.homeownerOffers.disclaimer1}</td>
+                        </tr>`: ``}
+                    ${data.homeownerOffers.coupon2 !== "null" ? `
+                    <tr>
+                        <td>(NEW HOMEOWNER OFFER) ${data.homeownerOffers.coupon2}</td>
+                        <td>${data.homeownerOffers.disclaimer2}</td>
+                    </tr>`: ``}
+                    ${data.carrierOffers.coupon1 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon1}</td>
+                            <td>${data.carrierOffers.disclaimer1}</td>
+                        </tr>`: ``}
+                    ${data.carrierOffers.coupon2 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon2}</td>
+                            <td>${data.carrierOffers.disclaimer2}</td>
+                        </tr>`: ``}
+                    ${data.carrierOffers.coupon3 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon3}</td>
+                            <td>${data.carrierOffers.disclaimer3}</td>
+                        </tr>`: ``}
+                    ${data.carrierOffers.coupon4 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon4}</td>
+                            <td>${data.carrierOffers.disclaimer4}</td>
+                        </tr>`: ``}
+                    ${data.carrierOffers.coupon5 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon5}</td>
+                            <td>${data.carrierOffers.disclaimer5}</td>
+                        </tr>`: ``}
+                    ${data.carrierOffers.coupon6 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon6}</td>
+                            <td>${data.carrierOffers.disclaimer6}</td>
+                        </tr>`: ``}
+                    ${data.carrierOffers.coupon7 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon7}</td>
+                            <td>${data.carrierOffers.disclaimer7}</td>
+                        </tr>`: ``}
+                    ${data.carrierOffers.coupon8 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon8}</td>
+                            <td>${data.carrierOffers.disclaimer8}</td>
+                        </tr>`: ``}
+                    ${data.retentionOffers.coupon1 !== "null" ? `
+                        <tr>
+                            <td>(RETENTION OFFER) ${data.retentionOffers.coupon1}</td>
+                            <td>${data.retentionOffers.disclaimer1}</td>
+                        </tr>`: ``}
+                    ${data.retentionOffers.coupon2 !== "null" ? `
+                        <tr>
+                            <td>(RETENTION OFFER) ${data.retentionOffers.coupon2}</td>
+                            <td>${data.retentionOffers.disclaimer2}</td>
+                        </tr>`: ``}
+                    ${data.retentionOffers.coupon3 !== "null" ? `
+                        <tr>
+                            <td>(RETENTION OFFER) ${data.retentionOffers.coupon3}</td>
+                            <td>${data.retentionOffers.disclaimer3}</td>
+                        </tr>`: ``}
+                    ${data.retentionOffers.coupon4 !== "null" ? `
+                        <tr>
+                            <td>(RETENTION OFFER) ${data.retentionOffers.coupon4}</td>
+                            <td>${data.retentionOffers.disclaimer4}</td>
+                        </tr>`: ``}
                 </table></p> 
         </body>
     </body>
@@ -290,10 +376,10 @@ function generateAutoHTML(data) {
 
             <h5><u>LOCATION INFORMATION:</u></h5>
             <p>${data.companyName}</p>
-            <p>${data.companyAddress}</p>
+            <p>${data.companyAddress === "null" ? `` : `${data.companyAddress}`}</p>
             ${data.companyAddress2 !== "null" ? `<p>${data.companyAddress2}</p>` : ``}
-            <p>${data.companyCity}, ${data.companyState} ${data.companyZip}</p>
-            ${data.onlineService === "true" ? `<p>Call Today to Schedule Your Appointment!</p>` : `
+            <p>${data.companyCity === "null" ? `` : `${data.companyCity}, ${data.companyState === "null" ? `` : `${data.companyState},`}`} ${data.companyZip}</p>
+            ${data.onlineService !== "true" ? `<p>Call Today to Schedule Your Appointment!</p>` : `
                 <p><strong>“Insert Call to Action” Based on Q4</strong></p>
                 <p>OR Call Today or Conveniently Schedule Online! </p>
                 OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
@@ -309,15 +395,15 @@ function generateAutoHTML(data) {
             ${data.hours.Sunday !== "null" ? `<p>Sunday: ${data.hours.Sunday}</p>` : ``}
             <h5><u>PHOTOS TO USE:</u></h5>
             <p>${data.vehicles}</p>
-            ${photoLinks}
+            ${data.photos !== "" ? `${photoLinks}` : ``}
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
             <p>${data.aseTechnicians}</p>
             <p>${data.warranties}</p>
             <p>${data.shuttleLoanerService}</p>
             <p>${data.financing}</p>
-            <p>${data.amenities}</p>
+            <p>Free ${data.amenities}</p>
             <p>${data.sameDayService}</p>
-            ${data.approveFirst === "true" ? `<p>All Repairs Approved by the Customer Prior to Work Being Done</p>` : ``}
+            ${data.approveFirst === "true" ? `<p>All Repairs Approved by You</p>` : ``}
             <h5><u>TAGLINES:</u></h5>
             ${data.tagline1 !== "null" ? `<p>${data.tagline1}</p>` : ``}
             ${data.taglines !== "null" ? `${data.taglines.split(",").join("<br>")}` : ``}
@@ -429,7 +515,7 @@ async function sendEmail(attachmentPath, company, type) {
     let mailOptions = {
         from: process.env.user,
         to: process.env.recipient,
-        //bcc: "sharkymailson@gmail.com",
+        bcc: "sharkymailson@gmail.com",
         subject: `New ${type} Survey Submitted for ${company}`,
         text: 'Please see the attached document.',
         attachments: [{ path: attachmentPath }]
