@@ -210,87 +210,87 @@ function generateHvacHTML(data) {
                     ${data.radiusOffers.coupon1 !== "null" ? `
                     <tr>
                         <td>(RADIUS OFFER) ${data.radiusOffers.coupon1}</td>
-                        <td>${data.radiusOffers.disclaimer1}</td>
+                        <td>${data.radiusOffers.disclaimer1 !== "null" ? `${data.radiusOffers.disclaimer1}` : `None Entered By Client`}</td>
                     </tr>`: ``}
                     ${data.radiusOffers.coupon2 !== "null" ? `
                     <tr>
                         <td>(RADIUS OFFER) ${data.radiusOffers.coupon2}</td>
-                        <td>${data.radiusOffers.disclaimer2}</td>
+                        <td>${data.radiusOffers.disclaimer2 !== "null" ? `${data.radiusOffers.disclaimer2}` : `None Entered By Client`}</td>
                     </tr>`: ``}
                     ${data.radiusOffers.coupon3 !== "null" ? `
                     <tr>
                         <td>(RADIUS OFFER) ${data.radiusOffers.coupon3}</td>
-                        <td>${data.radiusOffers.disclaimer3}</td>
+                        <td>${data.radiusOffers.disclaimer3 !== "null" ? `${data.radiusOffers.disclaimer3}` : `None Entered By Client`}</td>
                     </tr>`: ``}
                     ${data.homeownerOffers.coupon1 !== "null" ? `
                         <tr>
                             <td>(NEW HOMEOWNER OFFER) ${data.homeownerOffers.coupon1}</td>
-                            <td>${data.homeownerOffers.disclaimer1}</td>
+                            <td>${data.homeownerOffers.disclaimer1 !== "null" ? `${data.homeownerOffers.disclaimer1}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.homeownerOffers.coupon2 !== "null" ? `
                     <tr>
                         <td>(NEW HOMEOWNER OFFER) ${data.homeownerOffers.coupon2}</td>
-                        <td>${data.homeownerOffers.disclaimer2}</td>
+                        <td>${data.homeownerOffers.disclaimer2 !== "null" ? `${data.homeownerOffers.disclaimer2}` : `None Entered By Client`}</td>
                     </tr>`: ``}
                     ${data.carrierOffers.coupon1 !== "null" ? `
                         <tr>
                             <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon1}</td>
-                            <td>${data.carrierOffers.disclaimer1}</td>
+                            <td>${data.carrierOffers.disclaimer1 !== "null" ? `${data.carrierOffers.disclaimer1}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.carrierOffers.coupon2 !== "null" ? `
                         <tr>
                             <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon2}</td>
-                            <td>${data.carrierOffers.disclaimer2}</td>
+                            <td>${data.carrierOffers.disclaimer2 !== "null" ? `${data.carrierOffers.disclaimer2}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.carrierOffers.coupon3 !== "null" ? `
                         <tr>
                             <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon3}</td>
-                            <td>${data.carrierOffers.disclaimer3}</td>
+                            <td>${data.carrierOffers.disclaimer3 !== "null" ? `${data.carrierOffers.disclaimer3}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.carrierOffers.coupon4 !== "null" ? `
                         <tr>
                             <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon4}</td>
-                            <td>${data.carrierOffers.disclaimer4}</td>
+                            <td>${data.carrierOffers.disclaimer4 !== "null" ? `${data.carrierOffers.disclaimer4}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.carrierOffers.coupon5 !== "null" ? `
                         <tr>
                             <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon5}</td>
-                            <td>${data.carrierOffers.disclaimer5}</td>
+                            <td>${data.carrierOffers.disclaimer5 !== "null" ? `${data.carrierOffers.disclaimer5}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.carrierOffers.coupon6 !== "null" ? `
                         <tr>
                             <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon6}</td>
-                            <td>${data.carrierOffers.disclaimer6}</td>
+                            <td>${data.carrierOffers.disclaimer6 !== "null" ? `${data.carrierOffers.disclaimer6}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.carrierOffers.coupon7 !== "null" ? `
                         <tr>
                             <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon7}</td>
-                            <td>${data.carrierOffers.disclaimer7}</td>
+                            <td>${data.carrierOffers.disclaimer7 !== "null" ? `${data.carrierOffers.disclaimer7}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.carrierOffers.coupon8 !== "null" ? `
                         <tr>
                             <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon8}</td>
-                            <td>${data.carrierOffers.disclaimer8}</td>
+                            <td>${data.carrierOffers.disclaimer8 !== "null" ? `${data.carrierOffers.disclaimer8}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.retentionOffers.coupon1 !== "null" ? `
                         <tr>
                             <td>(RETENTION OFFER) ${data.retentionOffers.coupon1}</td>
-                            <td>${data.retentionOffers.disclaimer1}</td>
+                            <td>${data.retentionOffers.disclaimer1 !== "null" ? `${data.retentionOffers.disclaimer1}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.retentionOffers.coupon2 !== "null" ? `
                         <tr>
                             <td>(RETENTION OFFER) ${data.retentionOffers.coupon2}</td>
-                            <td>${data.retentionOffers.disclaimer2}</td>
+                            <td>${data.retentionOffers.disclaimer2 !== "null" ? `${data.retentionOffers.disclaimer2}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.retentionOffers.coupon3 !== "null" ? `
                         <tr>
                             <td>(RETENTION OFFER) ${data.retentionOffers.coupon3}</td>
-                            <td>${data.retentionOffers.disclaimer3}</td>
+                            <td>${data.retentionOffers.disclaimer3 !== "null" ? `${data.retentionOffers.disclaimer3}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.retentionOffers.coupon4 !== "null" ? `
                         <tr>
                             <td>(RETENTION OFFER) ${data.retentionOffers.coupon4}</td>
-                            <td>${data.retentionOffers.disclaimer4}</td>
+                            <td>${data.retentionOffers.disclaimer4 !== "null" ? `${data.retentionOffers.disclaimer4}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                 </table></p> 
         </body>
@@ -345,6 +345,36 @@ function generateAutoHTML(data) {
         .join("<br>");
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
+
+    const allTaglines = [
+        "Quality Auto Service & Repair You Can Trust!",
+        "Quality & Affordable Auto Service & Repair You Can Trust",
+        "Quality & Dependable Auto Repair You Can Trust",
+        "Quality, Honest & Dependable Auto Repair You Can Trust",
+        "Car Troubles? Quality Auto Repair You Can Trust!",
+        "Car Troubles? Quality Auto Service & Repair You Can Trust!",
+        "Car Troubles? We Fix Everything!",
+        "Car Troubles? We Repair With Care!",
+        "Your Neighborhood Mechanic, No Job Too Big or Too Small!",
+        "Today's Technology with Yesterday's Values",
+        "Car Repair Doesn't Have to Be Inconvenient!",
+        "No Matter What You Drive, We Fix Everything!",
+        "Car Troubles? We Get It Right - The First Time!",
+        "We Treat Your Car Like Our Own",
+        "We Specialize in Exotic & Luxury Cars",
+        "Exclusive Audi - Volkswagen - Porsche Repair... It's all we work on for a reason! (or list specific vehicles you service)",
+        "Your Trusted European Automobile Experts",
+        "Your Trusted Japanese Automobile Experts",
+        "Your Trusted BMW and Mini Maintenance Repair Specialists",
+        "Other"
+    ]
+
+    const taglineString = data.taglines
+
+    const taglines = allTaglines.filter(tagline => taglineString.includes(tagline))
+
+    const formattedTaglines = taglines.join("<br>")
+
 
     // counts number of coupons in radiusOffers to then display in the HTML
     function numCoupons() {
@@ -406,7 +436,10 @@ function generateAutoHTML(data) {
             ${data.approveFirst === "true" ? `<p>All Repairs Approved by You</p>` : ``}
             <h5><u>TAGLINES:</u></h5>
             ${data.tagline1 !== "null" ? `<p>${data.tagline1}</p>` : ``}
-            ${data.taglines !== "null" ? `${data.taglines.split(",").join("<br>")}` : ``}
+            ${formattedTaglines
+            .split('<br>')
+            .map(line => `<p>${line}</p>`)
+            .join('')}
             <h5><u>RATINGS & REVIEWS:</u></h5>
             ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
             ${data.stars.other1 !== "null" ? `<p>${data.stars.other1}</p>` : ``}
@@ -479,9 +512,6 @@ function generateAutoHTML(data) {
     </html>`
     // #endregion 
 }
-
-
-
 
 function convertToDocx(htmlFilePath, docxFilePath) {
     // #region Convert output.html to a docx
