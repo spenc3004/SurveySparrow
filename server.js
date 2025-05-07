@@ -180,6 +180,7 @@ function generateHvacHTML(data) {
             ${data.otherAwards.split(",").join("<br>")}` : ``}
             <h5><u>OTHER NOTES:</u></h5> 
             <p>${data.applicables}</p>
+            <p>${data.additionalInfo}</p>
             ${JSON.parse(data.homeOwner) ? `
                 <h6>New Homeowner mailings?</h6> Yes
                 <h6>Homeowners Offers: </h6>
