@@ -76,7 +76,13 @@ app.post("/hvac", async (req, res) => {
 
 function generateHvacHTML(data) {
     // #region insert data dynamically into html
+    // dynamically create "a" tags for photos
     const photoLinks = data.photos
+        .split(",")
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Photo</i></u></a>`)
+        .join("<br>");
+    // dynamically create "a" tags for other photos
+    const otherPhotoLinks = data.otherPhotos
         .split(",")
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Photo</i></u></a>`)
         .join("<br>");
@@ -153,7 +159,8 @@ function generateHvacHTML(data) {
                 <p>OR Call Today or Conveniently Schedule Online!</p>
                 <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
             <h5><u>PHOTOS TO USE:</u></h5>
-            ${data.photos !== "" ? `${photoLinks}` : ``}
+            ${data.photos !== "" ? `${photoLinks}` : ``} <br>
+            ${data.otherPhotos !== "" ? `${otherPhotoLinks}` : ``}
             <h5><u>SERVICES:</u></h5>
             ${data.services.split(",").join("<br>")}
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
@@ -192,12 +199,12 @@ function generateHvacHTML(data) {
                     ${data.homeownerOffers.coupon1 !== "null" ? `
                     <tr>
                         <td>${data.homeownerOffers.coupon1}</td>
-                        <td>${data.homeownerOffers.disclaimer1}</td>
+                        <td>${data.homeownerOffers.disclaimer1 !== "null" ? `${data.homeownerOffers.disclaimer1}` : `None Entered By Client`}</td>
                     </tr>`: ``}
                     ${data.homeownerOffers.coupon2 !== "null" ? `
                     <tr>
                         <td>${data.homeownerOffers.coupon2}</td>
-                        <td>${data.homeownerOffers.disclaimer2}</td>
+                        <td>${data.homeownerOffers.disclaimer2 !== "null" ? `${data.homeownerOffers.disclaimer2}` : `None Entered By Client`}</td>
                     </tr>`: ``}
                 </table></p> 
               
@@ -347,7 +354,7 @@ function generateAutoHTML(data) {
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
-    const allTaglines = [
+    const autoTaglines = [
         "Quality Auto Service & Repair You Can Trust!",
         "Quality & Affordable Auto Service & Repair You Can Trust",
         "Quality & Dependable Auto Repair You Can Trust",
@@ -372,7 +379,7 @@ function generateAutoHTML(data) {
 
     const taglineString = data.taglines
 
-    const taglines = allTaglines.filter(tagline => taglineString.includes(tagline))
+    const taglines = autoTaglines.filter(tagline => taglineString.includes(tagline))
 
     const formattedTaglines = taglines.join("<br>")
 
@@ -432,7 +439,7 @@ function generateAutoHTML(data) {
             <p>${data.warranties}</p>
             <p>${data.shuttleLoanerService}</p>
             <p>${data.financing}</p>
-            <p>Free ${data.amenities}</p>
+            ${data.amenities !== "" ? `<p>Free ${data.amenities}</p>` : ``}
             <p>${data.sameDayService}</p>
             ${data.approveFirst === "true" ? `<p>All Repairs Approved by You</p>` : ``}
             <h5><u>TAGLINES:</u></h5>
@@ -469,42 +476,287 @@ function generateAutoHTML(data) {
                     ${data.coupons.coupon1 !== "null" ? `
                     <tr>
                         <td>${data.coupons.coupon1}</td>
-                        <td>${data.coupons.disclaimer1}</td>
+                        <td>${data.coupons.disclaimer1 !== "null" ? `${data.coupons.disclaimer1}` : `None Entered By Client`}</td>
                     </tr>`: ``}
                     ${data.coupons.coupon2 !== "null" ? `
                     <tr>
                         <td>${data.coupons.coupon2}</td>
-                        <td>${data.coupons.disclaimer2}</td>
+                        <td>${data.coupons.disclaimer2 !== "null" ? `${data.coupons.disclaimer2}` : `None Entered By Client`}</td>
                     </tr>`: ``}
                     ${data.coupons.coupon3 !== "null" ? `
                     <tr>
                         <td>${data.coupons.coupon3}</td>
-                        <td>${data.coupons.disclaimer3}</td>
+                        <td>${data.coupons.disclaimer3 !== "null" ? `${data.coupons.disclaimer3}` : `None Entered By Client`}</td>
                     </tr>`: ``}
                     ${data.coupons.coupon4 !== "null" ? `
                         <tr>
                             <td>${data.coupons.coupon4}</td>
-                            <td>${data.coupons.disclaimer4}</td>
+                            <td>${data.coupons.disclaimer4 !== "null" ? `${data.coupons.disclaimer4}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.coupons.coupon5 !== "null" ? `
                         <tr>
                             <td>${data.coupons.coupon5}</td>
-                            <td>${data.coupons.disclaimer5}</td>
+                            <td>${data.coupons.disclaimer5 !== "null" ? `${data.coupons.disclaimer5}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.coupons.coupon6 !== "null" ? `
                         <tr>
                             <td>${data.coupons.coupon6}</td>
-                            <td>${data.coupons.disclaimer6}</td>
+                            <td>${data.coupons.disclaimer6 !== "null" ? `${data.coupons.disclaimer6}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.coupons.coupon7 !== "null" ? `
                         <tr>
                             <td>${data.coupons.coupon7}</td>
-                            <td>${data.coupons.disclaimer7}</td>
+                            <td>${data.coupons.disclaimer7 !== "null" ? `${data.coupons.disclaimer7}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                     ${data.coupons.coupon8 !== "null" ? `
                         <tr>
                             <td>${data.coupons.coupon8}</td>
-                            <td>${data.coupons.disclaimer8}</td>
+                            <td>${data.coupons.disclaimer8 !== "null" ? `${data.coupons.disclaimer8}` : `None Entered By Client`}</td>
+                        </tr>`: ``}
+                </table></p> 
+        </body>
+    </body>
+    
+    </html>`
+    // #endregion 
+}
+
+app.post("/roofing", async (req, res) => {
+    // #region AUTO Receive JSON from Survey Sparrow
+    try {
+        const data = req.body
+        const company = data.companyName
+        const type = "Roofing"
+        const htmlContent = generateRoofingHTML(data)
+        const htmlFilePath = path.join(OUTPUT_DIR, 'Roofing_Brief.html');
+        const docxFilePath = path.join(OUTPUT_DIR, 'Roofing_Brief.docx');
+
+        fs.writeFileSync(htmlFilePath, htmlContent);
+        await convertToDocx(htmlFilePath, docxFilePath);
+        await sendEmail(docxFilePath, company, type);
+
+        fs.unlinkSync(htmlFilePath);
+        fs.unlinkSync(docxFilePath);
+
+        res.status(200).send('File processed and email sent.');
+    }
+
+    catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+    // #endregion
+});
+
+function generateRoofingHTML(data) {
+    // #region insert data dynamically into html
+    // dynamically create "a" tags for photos
+    const photoLinks = data.photos
+        .split(",")
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Photo</i></u></a>`)
+        .join("<br>");
+    // dynamically create "a" tags for other photos
+    const otherPhotoLinks = data.otherPhotos
+        .split(",")
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Photo</i></u></a>`)
+        .join("<br>");
+    // dynamically create "a" tags for logo photos
+    const logoLinks = data.logo
+        .split(",")
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
+        .join("<br>");
+    // dynamically create "a" tags for award or logo photos
+    const awardOrLogoLinks = data.awards
+        .split(",")
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
+        .join("<br>");
+
+
+    const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
+
+    const roofingTaglines = [
+        "Quality Roofing Experts You Can Trust",
+        "Quality & Affordable Roofing Experts You Can Trust",
+        "Quality, Trusted & Affordable Roofing Experts",
+        "Quality Roofing Installation & Repair You Can Trust",
+        "Your Trusted Neighborhood Roofing Specialists",
+        "Problems With Your Roof? We Fix Everything!",
+        "Problems With Your Roof? We Get It Right - The First Time!",
+        "Your Neighborhood Roofing Experts",
+        "Other"
+    ]
+
+    const taglineString = data.premadeTaglines
+
+    const taglines = roofingTaglines.filter(tagline => taglineString.includes(tagline))
+
+    const formattedTaglines = taglines.join("<br>")
+
+
+    // counts number of coupons in radiusOffers to then display in the HTML
+    function numCoupons() {
+        counter = 0
+        for (const key in data.homeownerOffers) {
+            if (key.startsWith("coupon")) {
+                if (data.homeownerOffers[key] !== "null") {
+                    counter += 1
+                }
+            }
+        }
+        for (const key in data.radiusOffers) {
+            if (key.startsWith("coupon")) {
+                if (data.radiusOffers[key] !== "null") {
+                    counter += 1
+                }
+            }
+        }
+        for (const key in data.carrierOffers) {
+            if (key.startsWith("coupon")) {
+                if (data.carrierOffers[key] !== "null") {
+                    counter += 1
+                }
+            }
+        }
+        return counter;
+    }
+
+
+    return `<!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    
+    <body>
+            <h4>We have a new Roofing client doing a "Insert Product and Size"</h4>
+            <h5><u>DESIGN:</u></h5>
+            ${data.design === "true" ? `<p>There is a specific design.</p> ` : ``}
+            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p> ` : ``}
+
+            <h5><u>LOCATION INFORMATION:</u></h5>
+            <p>${data.companyName}</p>
+            <p>${phone}</p>
+            <p>${data.website}</p>
+            ${data.license !== "null" ? `<p>${data.license}</p>` : ``}
+            ${data.onlineService !== "true" ? `<p>Call Today to Schedule Your Appointment!</p>` : `
+                <p><strong>“Insert Call to Action” Based on Q4</strong></p>
+                <p>OR Call Today or Conveniently Schedule Online!</p>
+                <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
+            <h5><u>PHOTOS TO USE:</u></h5>
+            ${data.photos !== "" ? `${photoLinks}` : ``} <br>
+            ${data.otherPhotos !== "" ? `${otherPhotoLinks}` : ``}
+            <h5><u>SERVICES:</u></h5>
+            ${data.services.split(",").join("<br>")}
+            <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
+            <p>${data.pricing}</p>
+            <p>${data.warranties}</p>
+            <p>${data.financing}</p>
+            <h5><u>TAGLINES:</u></h5>
+            ${data.hasTaglines === "true" ?
+            `${data.customTaglines.tagline1 !== "null" ? `<p>${data.customTaglines.tagline1}</p>` : ``}
+                ${data.customTaglines.tagline2 !== "null" ? `<p>${data.customTaglines.tagline2}</p>` : ``}`
+            : ``}
+            ${formattedTaglines
+            .split('<br>')
+            .map(line => `<p>${line}</p>`)
+            .join('')}
+            <h5><u>RATINGS:</u></h5>
+            ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
+            ${data.stars.other1 !== "null" ? `<p>${data.stars.other1}</p>` : ``}
+            ${data.stars.other2 !== "null" ? `<p>${data.stars.other2}</p>` : ``}
+            ${data.stars.other3 !== "null" ? `<p>${data.stars.other3}</p>` : ``}
+            <h5><u>LOGOs to Use:</u></h5> 
+            ${!data.logo ? `` : `${logoLinks}<br>`}
+            ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
+            ${bbbImageMap[data.bbb] ? `<a href="${bbbImageMap[data.bbb]}" target="_blank"><u><i>View BBB Logo</i></u></a><br>` : ``}
+            ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
+            ${data.otherAwards.split(",").join("<br>")}` : ``}
+            <h5><u>OTHER NOTES:</u></h5> 
+            <p>${data.applicables}</p>
+            <p>${data.additionalInfo}</p>
+            ${JSON.parse(data.homeOwner) ? `
+                <h6>New Homeowner mailings?</h6> Yes
+                <h6>Homeowners Offers: </h6>
+                <table>
+                    <tr>
+                        <th>Coupon</th>
+                        <th>Disclaimer</th>
+                    </tr>
+                    ${data.homeownerOffers.coupon1 !== "null" ? `
+                    <tr>
+                        <td>${data.homeownerOffers.coupon1}</td>
+                        <td>${data.homeownerOffers.disclaimer1 !== "null" ? `${data.homeownerOffers.disclaimer1}` : `None Entered By Client`}</td>
+                    </tr>`: ``}
+                    ${data.homeownerOffers.coupon2 !== "null" ? `
+                    <tr>
+                        <td>${data.homeownerOffers.coupon2}</td>
+                        <td>${data.homeownerOffers.disclaimer2 !== "null" ? `${data.homeownerOffers.disclaimer2}` : `None Entered By Client`}</td>
+                    </tr>`: ``}
+                </table></p> 
+              
+            ` : ``}
+            <h5><u>COUPONS(There are ${numCoupons()} coupons):</u></h5>        
+             <table>
+                    <tr>
+                        <th>Coupon</th>
+                        <th>Disclaimer</th>
+                    </tr>
+                    ${data.radiusOffers.coupon1 !== "null" ? `
+                    <tr>
+                        <td>(RADIUS OFFER) ${data.radiusOffers.coupon1}</td>
+                        <td>${data.radiusOffers.disclaimer1 !== "null" ? `${data.radiusOffers.disclaimer1}` : `None Entered By Client`}</td>
+                    </tr>`: ``}
+                    ${data.radiusOffers.coupon2 !== "null" ? `
+                    <tr>
+                        <td>(RADIUS OFFER) ${data.radiusOffers.coupon2}</td>
+                        <td>${data.radiusOffers.disclaimer2 !== "null" ? `${data.radiusOffers.disclaimer2}` : `None Entered By Client`}</td>
+                    </tr>`: ``}
+                    ${data.radiusOffers.coupon3 !== "null" ? `
+                    <tr>
+                        <td>(RADIUS OFFER) ${data.radiusOffers.coupon3}</td>
+                        <td>${data.radiusOffers.disclaimer3 !== "null" ? `${data.radiusOffers.disclaimer3}` : `None Entered By Client`}</td>
+                    </tr>`: ``}
+                    ${data.homeownerOffers.coupon1 !== "null" ? `
+                        <tr>
+                            <td>(NEW HOMEOWNER OFFER) ${data.homeownerOffers.coupon1}</td>
+                            <td>${data.homeownerOffers.disclaimer1 !== "null" ? `${data.homeownerOffers.disclaimer1}` : `None Entered By Client`}</td>
+                        </tr>`: ``}
+                    ${data.homeownerOffers.coupon2 !== "null" ? `
+                    <tr>
+                        <td>(NEW HOMEOWNER OFFER) ${data.homeownerOffers.coupon2}</td>
+                        <td>${data.homeownerOffers.disclaimer2 !== "null" ? `${data.homeownerOffers.disclaimer2}` : `None Entered By Client`}</td>
+                    </tr>`: ``}
+                    ${data.carrierOffers.coupon1 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon1}</td>
+                            <td>${data.carrierOffers.disclaimer1 !== "null" ? `${data.carrierOffers.disclaimer1}` : `None Entered By Client`}</td>
+                        </tr>`: ``}
+                    ${data.carrierOffers.coupon2 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon2}</td>
+                            <td>${data.carrierOffers.disclaimer2 !== "null" ? `${data.carrierOffers.disclaimer2}` : `None Entered By Client`}</td>
+                        </tr>`: ``}
+                    ${data.carrierOffers.coupon3 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon3}</td>
+                            <td>${data.carrierOffers.disclaimer3 !== "null" ? `${data.carrierOffers.disclaimer3}` : `None Entered By Client`}</td>
+                        </tr>`: ``}
+                    ${data.carrierOffers.coupon4 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon4}</td>
+                            <td>${data.carrierOffers.disclaimer4 !== "null" ? `${data.carrierOffers.disclaimer4}` : `None Entered By Client`}</td>
+                        </tr>`: ``}
+                    ${data.carrierOffers.coupon5 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon5}</td>
+                            <td>${data.carrierOffers.disclaimer5 !== "null" ? `${data.carrierOffers.disclaimer5}` : `None Entered By Client`}</td>
+                        </tr>`: ``}
+                    ${data.carrierOffers.coupon6 !== "null" ? `
+                        <tr>
+                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon6}</td>
+                            <td>${data.carrierOffers.disclaimer6 !== "null" ? `${data.carrierOffers.disclaimer6}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                 </table></p> 
         </body>
