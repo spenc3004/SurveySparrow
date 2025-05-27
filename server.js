@@ -96,7 +96,8 @@ function generateHvacHTML(data) {
         .split(",")
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
         .join("<br>");
-
+    // dynamically create "a" tags for design refeerence image if it exists
+    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
@@ -146,8 +147,10 @@ function generateHvacHTML(data) {
     <body>
             <h4>We have a new HVAC client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
-            ${data.design === "true" ? `There is a specific design. ` : ``}
-            ${data.designBasedOnWeb === "true" ? `Base the design on their website. ` : ``} <br>
+            ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
+            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
+            ${data.designInstructions !== "null" ? `${data.designInstructions}<br><br>` : ``}
+            ${data.designReference !== "null" ? `${designRefImg}` : ``}<br>
 
             <h5><u>LOCATION INFORMATION:</u></h5>
             <p>${data.companyName}</p>
@@ -359,6 +362,8 @@ function generateAutoHTML(data) {
         .split(",")
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
+    // dynamically create "a" tags for design refeerence image if it exists
+    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
@@ -417,8 +422,10 @@ function generateAutoHTML(data) {
     <body>
             <h4>We have a new Automotive client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
-            ${data.design === "true" ? `There is a specific design.` : ``}
-            ${data.designBasedOnWeb === "true" ? `Base the design on their website.` : ``} <br>
+            ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
+            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
+            ${data.designInstructions !== "null" ? `${data.designInstructions}<br><br>` : ``}
+            ${data.designReference !== "null" ? `${designRefImg}` : ``}<br>
             <h5><u>LOCATION INFORMATION:</u></h5>
             <p>${data.companyName}</p>
             <p>${data.companyAddress === "null" ? `` : `${data.companyAddress}`}</p>
@@ -585,7 +592,8 @@ function generateRoofingHTML(data) {
         .split(",")
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
         .join("<br>");
-
+    // dynamically create "a" tags for design refeerence image if it exists
+    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
@@ -647,8 +655,10 @@ function generateRoofingHTML(data) {
     <body>
             <h4>We have a new Roofing client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
-            ${data.design === "true" ? `<p>There is a specific design.</p> ` : ``}
-            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p> ` : ``}
+            ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
+            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
+            ${data.designInstructions !== "null" ? `${data.designInstructions}<br><br>` : ``}
+            ${data.designReference !== "null" ? `${designRefImg}` : ``}<br>
 
             <h5><u>LOCATION INFORMATION:</u></h5>
             <p>${data.companyName}</p>
@@ -830,6 +840,8 @@ function generatePlumbingHTML(data) {
         .split(",")
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
         .join("<br>");
+    // dynamically create "a" tags for design refeerence image if it exists
+    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
 
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
@@ -880,8 +892,10 @@ function generatePlumbingHTML(data) {
     <body>
             <h4>We have a new Plumbing client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
-            ${data.design === "true" ? `<p>There is a specific design.</p> ` : ``}
-            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p> ` : ``}
+            ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
+            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
+            ${data.designInstructions !== "null" ? `${data.designInstructions}<br><br>` : ``}
+            ${data.designReference !== "null" ? `${designRefImg}` : ``}<br>
 
             <h5><u>LOCATION INFORMATION:</u></h5>
             <p>${data.companyName}</p>
@@ -1091,7 +1105,8 @@ function generateElectricalHTML(data) {
         .split(",")
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
         .join("<br>");
-
+    // dynamically create "a" tags for design refeerence image if it exists
+    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
@@ -1141,8 +1156,10 @@ function generateElectricalHTML(data) {
     <body>
             <h4>We have a new Electrical client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
-            ${data.design === "true" ? `<p>There is a specific design.</p> ` : ``}
-            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p> ` : ``}
+            ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
+            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
+            ${data.designInstructions !== "null" ? `${data.designInstructions}<br><br>` : ``}
+            ${data.designReference !== "null" ? `${designRefImg}` : ``}<br>
 
             <h5><u>LOCATION INFORMATION:</u></h5>
             <p>${data.companyName}</p>
@@ -1352,7 +1369,8 @@ function generateGeneralHTML(data) {
         .split(",")
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
         .join("<br>");
-
+    // dynamically create "a" tags for design refeerence image if it exists
+    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
@@ -1402,8 +1420,10 @@ function generateGeneralHTML(data) {
     <body>
             <h4>We have a new General Business client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
-            ${data.design === "true" ? `<p>There is a specific design.</p> ` : ``}
-            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p> ` : ``}
+            ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
+            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
+            ${data.designInstructions !== "null" ? `${data.designInstructions}<br><br>` : ``}
+            ${data.designReference !== "null" ? `${designRefImg}` : ``}<br>
 
             <h5><u>LOCATION INFORMATION:</u></h5>
             <p>${data.companyName}</p>
@@ -1613,6 +1633,9 @@ function generateDentalHTML(data) {
         .split(",")
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
         .join("<br>");
+    // dynamically create "a" tags for design refeerence image if it exists
+    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
+
 
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
@@ -1663,8 +1686,11 @@ function generateDentalHTML(data) {
     <body>
             <h4>We have a new Dental client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
-            ${data.design === "true" ? `<p>There is a specific design.</p> ` : ``}
-            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p> ` : ``}
+            ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
+            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
+            ${data.designInstructions !== "null" ? `${data.designInstructions}<br><br>` : ``}
+            ${data.designReference !== "null" ? `${designRefImg}` : ``}<br>
+
 
             <h5><u>LOCATION INFORMATION:</u></h5>
             <p>${data.companyName}</p>
