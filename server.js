@@ -146,8 +146,8 @@ function generateHvacHTML(data) {
     <body>
             <h4>We have a new HVAC client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
-            ${data.design === "true" ? `<p>There is a specific design.</p> ` : ``}
-            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p> ` : ``}
+            ${data.design === "true" ? `There is a specific design. ` : ``}
+            ${data.designBasedOnWeb === "true" ? `Base the design on their website. ` : ``} <br>
 
             <h5><u>LOCATION INFORMATION:</u></h5>
             <p>${data.companyName}</p>
@@ -158,33 +158,40 @@ function generateHvacHTML(data) {
                 <p><strong>“Insert Call to Action” Based on Q4</strong></p>
                 <p>OR Call Today or Conveniently Schedule Online!</p>
                 <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
+            <br>
             <h5><u>PHOTOS TO USE:</u></h5>
             ${data.photos !== "" ? `${photoLinks}` : ``} <br>
             ${data.otherPhotos !== "" ? `${otherPhotoLinks}` : ``}
+            <br>
             <h5><u>SERVICES:</u></h5>
             ${data.services.split(",").join("<br>")}
+            <br>
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
             <p>${data.pricing}</p>
             <p>${data.warranties}</p>
             <p>${data.technicians}</p>
             <p>${data.financing}</p>
+            <br>
             <h5><u>TAGLINES:</u></h5>
             ${data.hasTaglines === "true" ?
             `${data.customTaglines.tagline1 !== "null" ? `<p>${data.customTaglines.tagline1}</p>` : ``}
                 ${data.customTaglines.tagline2 !== "null" ? `<p>${data.customTaglines.tagline2}</p>` : ``}`
             : ``}
             ${data.premadeTaglines !== "null" ? `${data.premadeTaglines.split(",").join("<br>")}` : ``}
+            <br>
             <h5><u>RATINGS:</u></h5>
             ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
             ${data.stars.other1 !== "null" ? `<p>${data.stars.other1}</p>` : ``}
             ${data.stars.other2 !== "null" ? `<p>${data.stars.other2}</p>` : ``}
             ${data.stars.other3 !== "null" ? `<p>${data.stars.other3}</p>` : ``}
+            <br>
             <h5><u>LOGOs to Use:</u></h5> 
             ${!data.logo ? `` : `${logoLinks}<br>`}
             ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
             ${bbbImageMap[data.bbb] ? `<a href="${bbbImageMap[data.bbb]}" target="_blank"><u><i>View BBB Logo</i></u></a><br>` : ``}
             ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
             ${data.otherAwards.split(",").join("<br>")}` : ``}
+            <br>
             <h5><u>OTHER NOTES:</u></h5> 
             <p>${data.applicables}</p>
             <p>${data.additionalInfo}</p>
@@ -209,6 +216,7 @@ function generateHvacHTML(data) {
                 </table></p> 
               
             ` : ``}
+            <br>
             <h5><u>COUPONS(There are ${numCoupons()} coupons):</u></h5>        
              <table>
                     <tr>
@@ -407,11 +415,10 @@ function generateAutoHTML(data) {
     </head>
     
     <body>
-            <h4>We have a new HVAC client doing a "Insert Product and Size"</h4>
+            <h4>We have a new Automotive client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
-            ${data.design === "true" ? `<p>There is a specific design.</p> ` : ``}
-            ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p> ` : ``}
-
+            ${data.design === "true" ? `There is a specific design.` : ``}
+            ${data.designBasedOnWeb === "true" ? `Base the design on their website.` : ``} <br>
             <h5><u>LOCATION INFORMATION:</u></h5>
             <p>${data.companyName}</p>
             <p>${data.companyAddress === "null" ? `` : `${data.companyAddress}`}</p>
