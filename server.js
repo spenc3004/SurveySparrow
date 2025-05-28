@@ -94,7 +94,7 @@ function generateHvacHTML(data) {
     // dynamically create "a" tags for award or logo photos
     const awardOrLogoLinks = data.awards
         .split(",")
-        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
     const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
@@ -196,8 +196,9 @@ function generateHvacHTML(data) {
             ${data.otherAwards.split(",").join("<br>")}` : ``}
             <br>
             <h5><u>OTHER NOTES:</u></h5> 
-            <p>${data.applicables}</p>
-            <p>${data.additionalInfo}</p>
+            ${data.applicables !== "" ? `<p>${data.applicables}</p>` : ``}
+            ${data.additionalInfo !== "null" ? `<p>${data.additionalInfo}</p>` : ``}
+            ${data.radiusSports !== "null" ? `<p>Radius Sports Team: ${data.radiusSports}</p>` : ``}
             ${JSON.parse(data.homeOwner) ? `
                 <h6>New Homeowner mailings?</h6> Yes
                 <h6>Homeowners Offers: </h6>
@@ -383,7 +384,7 @@ function generateAutoHTML(data) {
         "Car Troubles? We Get It Right - The First Time!",
         "We Treat Your Car Like Our Own",
         "We Specialize in Exotic & Luxury Cars",
-        "Exclusive Audi - Volkswagen - Porsche Repair... It's all we work on for a reason! (or list specific vehicles you service)",
+        "Exclusive Audi - Volkswagen - Porsche Repair... It's all we work on for a reason!  (or list specific vehicles you service)",
         "Your Trusted European Automobile Experts",
         "Your Trusted Japanese Automobile Experts",
         "Your Trusted BMW and Mini Maintenance Repair Specialists",
@@ -420,7 +421,7 @@ function generateAutoHTML(data) {
     </head>
     
     <body>
-            <h4>We have a new Automotive client doing a "Insert Product and Size"</h4>
+            <h4>We have a new AUTOMOTIVE client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
             ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
             ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
@@ -590,7 +591,7 @@ function generateRoofingHTML(data) {
     // dynamically create "a" tags for award or logo photos
     const awardOrLogoLinks = data.awards
         .split(",")
-        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
     const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
@@ -653,14 +654,14 @@ function generateRoofingHTML(data) {
     </head>
     
     <body>
-            <h4>We have a new Roofing client doing a "Insert Product and Size"</h4>
+            <h4>We have a new ROOFING client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
             ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
             ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
             ${data.designInstructions !== "null" ? `${data.designInstructions}<br><br>` : ``}
             ${data.designReference !== "null" ? `${designRefImg}` : ``}<br>
 
-            <h5><u>LOCATION INFORMATION:</u></h5>
+            <h5><u>BUSINESS INFORMATION:</u></h5>
             <p>${data.companyName}</p>
             <p>${phone}</p>
             <p>${data.website}</p>
@@ -669,15 +670,19 @@ function generateRoofingHTML(data) {
                 <p><strong>“Insert Call to Action” Based on Q4</strong></p>
                 <p>OR Call Today or Conveniently Schedule Online!</p>
                 <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
+            <br>
             <h5><u>PHOTOS TO USE:</u></h5>
             ${data.photos !== "" ? `${photoLinks}` : ``} <br>
             ${data.otherPhotos !== "" ? `${otherPhotoLinks}` : ``}
-            <h5><u>SERVICES:</u></h5>
+            <br>
+            <h5><u>PRODUCTS/SERVICES:</u></h5>
             ${data.services.split(",").join("<br>")}
+            <br>
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
             <p>${data.pricing}</p>
             <p>${data.warranties}</p>
             <p>${data.financing}</p>
+            <br>
             <h5><u>TAGLINES:</u></h5>
             ${data.hasTaglines === "true" ?
             `${data.customTaglines.tagline1 !== "null" ? `<p>${data.customTaglines.tagline1}</p>` : ``}
@@ -687,20 +692,25 @@ function generateRoofingHTML(data) {
             .split('<br>')
             .map(line => `<p>${line}</p>`)
             .join('')}
+            <br>
             <h5><u>RATINGS:</u></h5>
             ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
             ${data.stars.other1 !== "null" ? `<p>${data.stars.other1}</p>` : ``}
             ${data.stars.other2 !== "null" ? `<p>${data.stars.other2}</p>` : ``}
             ${data.stars.other3 !== "null" ? `<p>${data.stars.other3}</p>` : ``}
+            ${data.stars.other4 !== "null" ? `<p>${data.stars.other4}</p>` : ``}
+            <br>
             <h5><u>LOGOs to Use:</u></h5> 
             ${!data.logo ? `` : `${logoLinks}<br>`}
             ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
             ${bbbImageMap[data.bbb] ? `<a href="${bbbImageMap[data.bbb]}" target="_blank"><u><i>View BBB Logo</i></u></a><br>` : ``}
             ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
             ${data.otherAwards.split(",").join("<br>")}` : ``}
+            <br>
             <h5><u>OTHER NOTES:</u></h5> 
-            <p>${data.applicables}</p>
-            <p>${data.additionalInfo}</p>
+            ${data.applicables !== "" ? `<p>${data.applicables}</p>` : ``}
+            ${data.additionalInfo !== "null" ? `<p>${data.additionalInfo}</p>` : ``}
+            ${data.radiusSports !== "null" ? `<p>Radius Sports Team: ${data.radiusSports}</p>` : ``}
             ${JSON.parse(data.homeOwner) ? `
                 <h6>New Homeowner mailings?</h6> Yes
                 <h6>Homeowners Offers: </h6>
@@ -722,6 +732,7 @@ function generateRoofingHTML(data) {
                 </table></p> 
               
             ` : ``}
+            <br>
             <h5><u>COUPONS(There are ${numCoupons()} coupons):</u></h5>        
              <table>
                     <tr>
@@ -838,13 +849,36 @@ function generatePlumbingHTML(data) {
     // dynamically create "a" tags for award or logo photos
     const awardOrLogoLinks = data.awards
         .split(",")
-        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
     const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
 
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
+
+    const plumbingTaglines = [
+        "Quality Plumbing Experts You Can Trust",
+        "Quality & Trusted Plumbing Professionals",
+        "Quality & Affordable Plumbing Experts You Can Trust",
+        "Quality, Trusted & Affordable Plumbing Experts",
+        "Quality & Dependable Plumbing Services",
+        "Quality Plumbing Service & Repair You Can Trust!",
+        "Your Trusted Neighborhood Plumbing Specialists",
+        "Plumbing Troubles? We Fix Everything!",
+        "Plumbing Problems? We Get It Right - The First Time!",
+        "Plumbing Problems? We Fix What Others Can’t",
+        "Plumbing Problems? We’re On Time Every Time",
+        "Plumbing Repair Doesn't Have to Be Inconvenient!",
+        "Your Family’s Comfort is Our Top Priority"
+    ]
+
+    const taglineString = data.premadeTaglines
+
+    const taglines = plumbingTaglines.filter(tagline => taglineString.includes(tagline))
+
+    const formattedTaglines = taglines.join("<br>")
+
 
     // counts number of coupons in radiusOffers to then display in the HTML
     function numCoupons() {
@@ -890,7 +924,7 @@ function generatePlumbingHTML(data) {
     </head>
     
     <body>
-            <h4>We have a new Plumbing client doing a "Insert Product and Size"</h4>
+            <h4>We have a new PLUMBING client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
             ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
             ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
@@ -906,36 +940,48 @@ function generatePlumbingHTML(data) {
                 <p><strong>“Insert Call to Action” Based on Q4</strong></p>
                 <p>OR Call Today or Conveniently Schedule Online!</p>
                 <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
+            <br>
             <h5><u>PHOTOS TO USE:</u></h5>
             ${data.photos !== "" ? `${photoLinks}` : ``} <br>
             ${data.otherPhotos !== "" ? `${otherPhotoLinks}` : ``}
+            <br>
             <h5><u>SERVICES:</u></h5>
             ${data.services.split(",").join("<br>")}
+            <br>
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
             <p>${data.pricing}</p>
             <p>${data.warranties}</p>
             <p>${data.technicians}</p>
             <p>${data.financing}</p>
+            <br>
             <h5><u>TAGLINES:</u></h5>
             ${data.hasTaglines === "true" ?
             `${data.customTaglines.tagline1 !== "null" ? `<p>${data.customTaglines.tagline1}</p>` : ``}
                 ${data.customTaglines.tagline2 !== "null" ? `<p>${data.customTaglines.tagline2}</p>` : ``}`
             : ``}
-            ${data.premadeTaglines !== "null" ? `${data.premadeTaglines.split(",").join("<br>")}` : ``}
+            ${formattedTaglines
+            .split('<br>')
+            .map(line => `<p>${line}</p>`)
+            .join('')}
+            <br>
             <h5><u>RATINGS:</u></h5>
             ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
             ${data.stars.other1 !== "null" ? `<p>${data.stars.other1}</p>` : ``}
             ${data.stars.other2 !== "null" ? `<p>${data.stars.other2}</p>` : ``}
             ${data.stars.other3 !== "null" ? `<p>${data.stars.other3}</p>` : ``}
+            ${data.stars.other4 !== "null" ? `<p>${data.stars.other4}</p>` : ``}
+            <br>
             <h5><u>LOGOs to Use:</u></h5> 
             ${!data.logo ? `` : `${logoLinks}<br>`}
             ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
             ${bbbImageMap[data.bbb] ? `<a href="${bbbImageMap[data.bbb]}" target="_blank"><u><i>View BBB Logo</i></u></a><br>` : ``}
             ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
             ${data.otherAwards.split(",").join("<br>")}` : ``}
+            <br>
             <h5><u>OTHER NOTES:</u></h5> 
-            <p>${data.applicables}</p>
-            <p>${data.additionalInfo}</p>
+            ${data.applicables !== "" ? `<p>${data.applicables}</p>` : ``}
+            ${data.additionalInfo !== "null" ? `<p>${data.additionalInfo}</p>` : ``}
+            ${data.radiusSports !== "null" ? `<p>Radius Sports Team: ${data.radiusSports}</p>` : ``}
             ${JSON.parse(data.homeOwner) ? `
                 <h6>New Homeowner mailings?</h6> Yes
                 <h6>Homeowners Offers: </h6>
@@ -957,6 +1003,7 @@ function generatePlumbingHTML(data) {
                 </table></p> 
               
             ` : ``}
+            <br>
             <h5><u>COUPONS(There are ${numCoupons()} coupons):</u></h5>        
              <table>
                     <tr>
@@ -987,6 +1034,11 @@ function generatePlumbingHTML(data) {
                     <tr>
                         <td>(NEW HOMEOWNER OFFER) ${data.homeownerOffers.coupon2}</td>
                         <td>${data.homeownerOffers.disclaimer2 !== "null" ? `${data.homeownerOffers.disclaimer2}` : `None Entered By Client`}</td>
+                    </tr>`: ``}
+                    ${data.homeownerOffers.coupon3 !== "null" ? `
+                    <tr>
+                        <td>(NEW HOMEOWNER OFFER) ${data.homeownerOffers.coupon3}</td>
+                        <td>${data.homeownerOffers.disclaimer3 !== "null" ? `${data.homeownerOffers.disclaimer3}` : `None Entered By Client`}</td>
                     </tr>`: ``}
                     ${data.carrierOffers.coupon1 !== "null" ? `
                         <tr>
@@ -1103,12 +1155,34 @@ function generateElectricalHTML(data) {
     // dynamically create "a" tags for award or logo photos
     const awardOrLogoLinks = data.awards
         .split(",")
-        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
     const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
+
+    const electricalTaglines = [
+        "Quality Electrical Experts You Can Trust",
+        "Quality & Affordable Electricians You Can Trust",
+        "Quality, Trusted & Affordable Electrical Experts",
+        "Quality & Dependable Electrical Services",
+        "Quality Electrical Service & Repair You Can Trust!",
+        "Your Trusted Neighborhood Electricians",
+        "Electrical Troubles? We Fix Everything!",
+        "Electrical Problems? We Get It Right - The First Time!",
+        "Electrical Problems? We Fix What Others Can’t",
+        "Electrical Problems? We’re On Time Every Time",
+        "Your Home’s Electrical Safety is Our Priority",
+        "Fast, Friendly, and Affordable Electrical Services",
+        "Safe, Reliable, and Efficient Electrical Solutions"
+    ]
+
+    const taglineString = data.premadeTaglines
+
+    const taglines = electricalTaglines.filter(tagline => taglineString.includes(tagline))
+
+    const formattedTaglines = taglines.join("<br>")
 
     // counts number of coupons in radiusOffers to then display in the HTML
     function numCoupons() {
@@ -1154,7 +1228,7 @@ function generateElectricalHTML(data) {
     </head>
     
     <body>
-            <h4>We have a new Electrical client doing a "Insert Product and Size"</h4>
+            <h4>We have a new ELECTRICAL client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
             ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
             ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
@@ -1170,36 +1244,48 @@ function generateElectricalHTML(data) {
                 <p><strong>“Insert Call to Action” Based on Q4</strong></p>
                 <p>OR Call Today or Conveniently Schedule Online!</p>
                 <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
+            <br>
             <h5><u>PHOTOS TO USE:</u></h5>
             ${data.photos !== "" ? `${photoLinks}` : ``} <br>
             ${data.otherPhotos !== "" ? `${otherPhotoLinks}` : ``}
+            <br>
             <h5><u>SERVICES:</u></h5>
             ${data.services.split(",").join("<br>")}
+            <br>
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
             <p>${data.pricing}</p>
             <p>${data.warranties}</p>
             <p>${data.technicians}</p>
             <p>${data.financing}</p>
+            <br>
             <h5><u>TAGLINES:</u></h5>
             ${data.hasTaglines === "true" ?
             `${data.customTaglines.tagline1 !== "null" ? `<p>${data.customTaglines.tagline1}</p>` : ``}
                 ${data.customTaglines.tagline2 !== "null" ? `<p>${data.customTaglines.tagline2}</p>` : ``}`
             : ``}
-            ${data.premadeTaglines !== "null" ? `${data.premadeTaglines.split(",").join("<br>")}` : ``}
+            ${formattedTaglines
+            .split('<br>')
+            .map(line => `<p>${line}</p>`)
+            .join('')}
+            <br>
+
             <h5><u>RATINGS:</u></h5>
             ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
             ${data.stars.other1 !== "null" ? `<p>${data.stars.other1}</p>` : ``}
             ${data.stars.other2 !== "null" ? `<p>${data.stars.other2}</p>` : ``}
             ${data.stars.other3 !== "null" ? `<p>${data.stars.other3}</p>` : ``}
+            <br>
             <h5><u>LOGOs to Use:</u></h5> 
             ${!data.logo ? `` : `${logoLinks}<br>`}
             ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
             ${bbbImageMap[data.bbb] ? `<a href="${bbbImageMap[data.bbb]}" target="_blank"><u><i>View BBB Logo</i></u></a><br>` : ``}
             ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
             ${data.otherAwards.split(",").join("<br>")}` : ``}
+            <br>
             <h5><u>OTHER NOTES:</u></h5> 
-            <p>${data.applicables}</p>
-            <p>${data.additionalInfo}</p>
+            ${data.applicables !== "" ? `<p>${data.applicables}</p>` : ``}
+            ${data.additionalInfo !== "null" ? `<p>${data.additionalInfo}</p>` : ``}
+            ${data.radiusSports !== "null" ? `<p>Radius Sports Team: ${data.radiusSports}</p>` : ``}
             ${JSON.parse(data.homeOwner) ? `
                 <h6>New Homeowner mailings?</h6> Yes
                 <h6>Homeowners Offers: </h6>
@@ -1221,6 +1307,7 @@ function generateElectricalHTML(data) {
                 </table></p> 
               
             ` : ``}
+            <br>
             <h5><u>COUPONS(There are ${numCoupons()} coupons):</u></h5>        
              <table>
                     <tr>
@@ -1367,7 +1454,7 @@ function generateGeneralHTML(data) {
     // dynamically create "a" tags for award or logo photos
     const awardOrLogoLinks = data.awards
         .split(",")
-        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
     const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
@@ -1418,7 +1505,7 @@ function generateGeneralHTML(data) {
     </head>
     
     <body>
-            <h4>We have a new General Business client doing a "Insert Product and Size"</h4>
+            <h4>We have a new GENERAL BUSINESS client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
             ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
             ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
@@ -1434,33 +1521,40 @@ function generateGeneralHTML(data) {
                 <p><strong>“Insert Call to Action” Based on Q4</strong></p>
                 <p>OR Call Today or Conveniently Schedule Online!</p>
                 <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
+            <br>
             <h5><u>PHOTOS TO USE:</u></h5>
             ${data.photos !== "" ? `${photoLinks}` : ``} <br>
             ${data.otherPhotos !== "" ? `${otherPhotoLinks}` : ``}
+            <br>
             <h5><u>SERVICES:</u></h5>
             ${data.services.split(",").join("<br>")}
+            <br>
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
             <p>${data.pricing}</p>
             <p>${data.warranties}</p>
             <p>${data.technicians}</p>
             <p>${data.financing}</p>
+            <br>
             <h5><u>TAGLINES:</u></h5>
             ${data.hasTaglines === "true" ?
             `${data.customTaglines.tagline1 !== "null" ? `<p>${data.customTaglines.tagline1}</p>` : ``}
                 ${data.customTaglines.tagline2 !== "null" ? `<p>${data.customTaglines.tagline2}</p>` : ``}`
             : ``}
             ${data.premadeTaglines !== "null" ? `${data.premadeTaglines.split(",").join("<br>")}` : ``}
+            <br>
             <h5><u>RATINGS:</u></h5>
             ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
             ${data.stars.other1 !== "null" ? `<p>${data.stars.other1}</p>` : ``}
             ${data.stars.other2 !== "null" ? `<p>${data.stars.other2}</p>` : ``}
             ${data.stars.other3 !== "null" ? `<p>${data.stars.other3}</p>` : ``}
+            <br>
             <h5><u>LOGOs to Use:</u></h5> 
             ${!data.logo ? `` : `${logoLinks}<br>`}
             ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
             ${bbbImageMap[data.bbb] ? `<a href="${bbbImageMap[data.bbb]}" target="_blank"><u><i>View BBB Logo</i></u></a><br>` : ``}
             ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
             ${data.otherAwards.split(",").join("<br>")}` : ``}
+            <br>
             <h5><u>OTHER NOTES:</u></h5> 
             <p>${data.applicables}</p>
             <p>${data.additionalInfo}</p>
@@ -1485,6 +1579,7 @@ function generateGeneralHTML(data) {
                 </table></p> 
               
             ` : ``}
+            <br>
             <h5><u>COUPONS(There are ${numCoupons()} coupons):</u></h5>        
              <table>
                     <tr>
@@ -1631,7 +1726,7 @@ function generateDentalHTML(data) {
     // dynamically create "a" tags for award or logo photos
     const awardOrLogoLinks = data.awards
         .split(",")
-        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
     const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
@@ -1684,13 +1779,12 @@ function generateDentalHTML(data) {
     </head>
     
     <body>
-            <h4>We have a new Dental client doing a "Insert Product and Size"</h4>
+            <h4>We have a new DENTAL client doing a "Insert Product and Size"</h4>
             <h5><u>DESIGN:</u></h5>
             ${data.design === "true" ? `<p>There is a specific design.</p>` : ``}
             ${data.designBasedOnWeb === "true" ? `<p>Base the design on their website.</p>` : ``}
             ${data.designInstructions !== "null" ? `${data.designInstructions}<br><br>` : ``}
             ${data.designReference !== "null" ? `${designRefImg}` : ``}<br>
-
 
             <h5><u>LOCATION INFORMATION:</u></h5>
             <p>${data.companyName}</p>
@@ -1701,33 +1795,40 @@ function generateDentalHTML(data) {
                 <p><strong>“Insert Call to Action” Based on Q4</strong></p>
                 <p>OR Call Today or Conveniently Schedule Online!</p>
                 <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
+            <br>
             <h5><u>PHOTOS TO USE:</u></h5>
             ${data.photos !== "" ? `${photoLinks}` : ``} <br>
             ${data.otherPhotos !== "" ? `${otherPhotoLinks}` : ``}
+            <br>
             <h5><u>SERVICES:</u></h5>
             ${data.services.split(",").join("<br>")}
+            <br>
             <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
             <p>${data.pricing}</p>
             <p>${data.warranties}</p>
             <p>${data.technicians}</p>
             <p>${data.financing}</p>
+            <br>
             <h5><u>TAGLINES:</u></h5>
             ${data.hasTaglines === "true" ?
             `${data.customTaglines.tagline1 !== "null" ? `<p>${data.customTaglines.tagline1}</p>` : ``}
                 ${data.customTaglines.tagline2 !== "null" ? `<p>${data.customTaglines.tagline2}</p>` : ``}`
             : ``}
             ${data.premadeTaglines !== "null" ? `${data.premadeTaglines.split(",").join("<br>")}` : ``}
+            <br>
             <h5><u>RATINGS:</u></h5>
             ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
             ${data.stars.other1 !== "null" ? `<p>${data.stars.other1}</p>` : ``}
             ${data.stars.other2 !== "null" ? `<p>${data.stars.other2}</p>` : ``}
             ${data.stars.other3 !== "null" ? `<p>${data.stars.other3}</p>` : ``}
+            <br>
             <h5><u>LOGOs to Use:</u></h5> 
             ${!data.logo ? `` : `${logoLinks}<br>`}
             ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
             ${bbbImageMap[data.bbb] ? `<a href="${bbbImageMap[data.bbb]}" target="_blank"><u><i>View BBB Logo</i></u></a><br>` : ``}
             ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
             ${data.otherAwards.split(",").join("<br>")}` : ``}
+            <br>
             <h5><u>OTHER NOTES:</u></h5> 
             <p>${data.applicables}</p>
             <p>${data.additionalInfo}</p>
@@ -1752,6 +1853,7 @@ function generateDentalHTML(data) {
                 </table></p> 
               
             ` : ``}
+            <br>
             <h5><u>COUPONS(There are ${numCoupons()} coupons):</u></h5>        
              <table>
                     <tr>
