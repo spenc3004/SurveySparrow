@@ -1464,30 +1464,9 @@ function generateGeneralHTML(data) {
     // counts number of coupons in radiusOffers to then display in the HTML
     function numCoupons() {
         counter = 0
-        for (const key in data.homeownerOffers) {
+        for (const key in data.coupons) {
             if (key.startsWith("coupon")) {
-                if (data.homeownerOffers[key] !== "null") {
-                    counter += 1
-                }
-            }
-        }
-        for (const key in data.radiusOffers) {
-            if (key.startsWith("coupon")) {
-                if (data.radiusOffers[key] !== "null") {
-                    counter += 1
-                }
-            }
-        }
-        for (const key in data.carrierOffers) {
-            if (key.startsWith("coupon")) {
-                if (data.carrierOffers[key] !== "null") {
-                    counter += 1
-                }
-            }
-        }
-        for (const key in data.retentionOffers) {
-            if (key.startsWith("coupon")) {
-                if (data.retentionOffers[key] !== "null") {
+                if (data.coupons[key] !== "null") {
                     counter += 1
                 }
             }
@@ -1514,71 +1493,65 @@ function generateGeneralHTML(data) {
 
             <h5><u>LOCATION INFORMATION:</u></h5>
             <p>${data.companyName}</p>
+            <p>${data.companyAddress !== "null" ? `${data.companyAddress}` : ``} ${data.companyAddress2 !== "null" ? `${data.companyAddress2}` : ``} <br>
+            ${data.companyCity !== "null" ? `${data.companyCity}` : ``} ${data.companyState !== "null" ? `${data.companyState}` : ``} ${data.companyZip !== "null" ? `${data.companyZip}` : ``}</p>
             <p>${phone}</p>
             <p>${data.website}</p>
-            ${data.license !== "null" ? `<p>${data.license}</p>` : ``}
-            ${data.onlineService !== "true" ? `<p>Call Today to Schedule Your Appointment!</p>` : `
-                <p><strong>“Insert Call to Action” Based on Q4</strong></p>
-                <p>OR Call Today or Conveniently Schedule Online!</p>
-                <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
+            ${data.qrCode === "true" ?
+            `Client would like a QR code to:<br>
+            <a href="${data.qrCodeLink}">${data.qrCodeLink}</a> <br> 
+            <strong>*Please create a Call To Action related to scanning the QR code</strong>`
+            : `Client does not want a QR Code`}
+            <p>Hours:${data.hours}</p>
             <br>
             <h5><u>PHOTOS TO USE:</u></h5>
             ${data.photos !== "" ? `${photoLinks}` : ``} <br>
             ${data.otherPhotos !== "" ? `${otherPhotoLinks}` : ``}
             <br>
             <h5><u>SERVICES:</u></h5>
-            ${data.services.split(",").join("<br>")}
+            ${data.services.a !== "null" ? `${data.services.a}<br>` : ``}
+            ${data.services.b !== "null" ? `${data.services.b}<br>` : ``}
+            ${data.services.c !== "null" ? `${data.services.c}<br>` : ``}
+            ${data.services.d !== "null" ? `${data.services.d}<br>` : ``}
+            ${data.services.e !== "null" ? `${data.services.e}<br>` : ``}
+            ${data.services.f !== "null" ? `${data.services.f}<br>` : ``}
+            ${data.services.g !== "null" ? `${data.services.g}<br>` : ``}
+            ${data.services.h !== "null" ? `${data.services.h}<br>` : ``}
             <br>
-            <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
-            <p>${data.pricing}</p>
-            <p>${data.warranties}</p>
-            <p>${data.technicians}</p>
-            <p>${data.financing}</p>
+            <h5><u>WHY CHOOSE US?</u></h5>
+            ${data.featuresBenefits.a !== "null" ? `${data.featuresBenefits.a}<br>` : ``}
+            ${data.featuresBenefits.b !== "null" ? `${data.featuresBenefits.b}<br>` : ``}
+            ${data.featuresBenefits.c !== "null" ? `${data.featuresBenefits.c}<br>` : ``}
+            ${data.featuresBenefits.d !== "null" ? `${data.featuresBenefits.d}<br>` : ``}
+            ${data.featuresBenefits.e !== "null" ? `${data.featuresBenefits.e}<br>` : ``}
+            ${data.featuresBenefits.f !== "null" ? `${data.featuresBenefits.f}<br>` : ``}
+            ${data.featuresBenefits.g !== "null" ? `${data.featuresBenefits.g}<br>` : ``}
+            ${data.featuresBenefits.h !== "null" ? `${data.featuresBenefits.h}<br>` : ``}
             <br>
             <h5><u>TAGLINES:</u></h5>
             ${data.hasTaglines === "true" ?
             `${data.customTaglines.tagline1 !== "null" ? `<p>${data.customTaglines.tagline1}</p>` : ``}
                 ${data.customTaglines.tagline2 !== "null" ? `<p>${data.customTaglines.tagline2}</p>` : ``}`
             : ``}
-            ${data.premadeTaglines !== "null" ? `${data.premadeTaglines.split(",").join("<br>")}` : ``}
             <br>
-            <h5><u>RATINGS:</u></h5>
+            <h5><u>REVIEWS/RATINGS:</u></h5>
             ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
+            ${data.stars.yelp !== "null" ? `<p>Yelp: ${data.stars.yelp}</p>` : ``}
+            ${data.stars.facebook !== "null" ? `<p>Facebook: ${data.stars.facebook}</p>` : ``}
             ${data.stars.other1 !== "null" ? `<p>${data.stars.other1}</p>` : ``}
             ${data.stars.other2 !== "null" ? `<p>${data.stars.other2}</p>` : ``}
             ${data.stars.other3 !== "null" ? `<p>${data.stars.other3}</p>` : ``}
+            ${data.stars.other4 !== "null" ? `<p>${data.stars.other4}</p>` : ``}
             <br>
             <h5><u>LOGOs to Use:</u></h5> 
             ${!data.logo ? `` : `${logoLinks}<br>`}
+            <br>
+            <h5><u>OTHER NOTES / AWARDS:</u></h5> 
+            <p>${data.additionalInfo}</p>
             ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
             ${bbbImageMap[data.bbb] ? `<a href="${bbbImageMap[data.bbb]}" target="_blank"><u><i>View BBB Logo</i></u></a><br>` : ``}
             ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
             ${data.otherAwards.split(",").join("<br>")}` : ``}
-            <br>
-            <h5><u>OTHER NOTES:</u></h5> 
-            <p>${data.applicables}</p>
-            <p>${data.additionalInfo}</p>
-            ${JSON.parse(data.homeOwner) ? `
-                <h6>New Homeowner mailings?</h6> Yes
-                <h6>Homeowners Offers: </h6>
-                <table>
-                    <tr>
-                        <th>Coupon</th>
-                        <th>Disclaimer</th>
-                    </tr>
-                    ${data.homeownerOffers.coupon1 !== "null" ? `
-                    <tr>
-                        <td>${data.homeownerOffers.coupon1}</td>
-                        <td>${data.homeownerOffers.disclaimer1 !== "null" ? `${data.homeownerOffers.disclaimer1}` : `None Entered By Client`}</td>
-                    </tr>`: ``}
-                    ${data.homeownerOffers.coupon2 !== "null" ? `
-                    <tr>
-                        <td>${data.homeownerOffers.coupon2}</td>
-                        <td>${data.homeownerOffers.disclaimer2 !== "null" ? `${data.homeownerOffers.disclaimer2}` : `None Entered By Client`}</td>
-                    </tr>`: ``}
-                </table></p> 
-              
-            ` : ``}
             <br>
             <h5><u>COUPONS(There are ${numCoupons()} coupons):</u></h5>        
              <table>
@@ -1586,90 +1559,45 @@ function generateGeneralHTML(data) {
                         <th>Coupon</th>
                         <th>Disclaimer</th>
                     </tr>
-                    ${data.radiusOffers.coupon1 !== "null" ? `
-                    <tr>
-                        <td>(RADIUS OFFER) ${data.radiusOffers.coupon1}</td>
-                        <td>${data.radiusOffers.disclaimer1 !== "null" ? `${data.radiusOffers.disclaimer1}` : `None Entered By Client`}</td>
-                    </tr>`: ``}
-                    ${data.radiusOffers.coupon2 !== "null" ? `
-                    <tr>
-                        <td>(RADIUS OFFER) ${data.radiusOffers.coupon2}</td>
-                        <td>${data.radiusOffers.disclaimer2 !== "null" ? `${data.radiusOffers.disclaimer2}` : `None Entered By Client`}</td>
-                    </tr>`: ``}
-                    ${data.radiusOffers.coupon3 !== "null" ? `
-                    <tr>
-                        <td>(RADIUS OFFER) ${data.radiusOffers.coupon3}</td>
-                        <td>${data.radiusOffers.disclaimer3 !== "null" ? `${data.radiusOffers.disclaimer3}` : `None Entered By Client`}</td>
-                    </tr>`: ``}
-                    ${data.homeownerOffers.coupon1 !== "null" ? `
+                    ${data.coupons.coupon1 !== "null" ? `
                         <tr>
-                            <td>(NEW HOMEOWNER OFFER) ${data.homeownerOffers.coupon1}</td>
-                            <td>${data.homeownerOffers.disclaimer1 !== "null" ? `${data.homeownerOffers.disclaimer1}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon1}</td>
+                            <td>${data.coupons.disclaimer1 !== "null" ? `${data.coupons.disclaimer1}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.homeownerOffers.coupon2 !== "null" ? `
-                    <tr>
-                        <td>(NEW HOMEOWNER OFFER) ${data.homeownerOffers.coupon2}</td>
-                        <td>${data.homeownerOffers.disclaimer2 !== "null" ? `${data.homeownerOffers.disclaimer2}` : `None Entered By Client`}</td>
-                    </tr>`: ``}
-                    ${data.carrierOffers.coupon1 !== "null" ? `
+                    ${data.coupons.coupon2 !== "null" ? `
                         <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon1}</td>
-                            <td>${data.carrierOffers.disclaimer1 !== "null" ? `${data.carrierOffers.disclaimer1}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon2}</td>
+                            <td>${data.coupons.disclaimer2 !== "null" ? `${data.coupons.disclaimer2}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.carrierOffers.coupon2 !== "null" ? `
+                    ${data.coupons.coupon3 !== "null" ? `
                         <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon2}</td>
-                            <td>${data.carrierOffers.disclaimer2 !== "null" ? `${data.carrierOffers.disclaimer2}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon3}</td>
+                            <td>${data.coupons.disclaimer3 !== "null" ? `${data.coupons.disclaimer3}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.carrierOffers.coupon3 !== "null" ? `
+                    ${data.coupons.coupon4 !== "null" ? `
                         <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon3}</td>
-                            <td>${data.carrierOffers.disclaimer3 !== "null" ? `${data.carrierOffers.disclaimer3}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon4}</td>
+                            <td>${data.coupons.disclaimer4 !== "null" ? `${data.coupons.disclaimer4}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.carrierOffers.coupon4 !== "null" ? `
+                    ${data.coupons.coupon5 !== "null" ? `
                         <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon4}</td>
-                            <td>${data.carrierOffers.disclaimer4 !== "null" ? `${data.carrierOffers.disclaimer4}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon5}</td>
+                            <td>${data.coupons.disclaimer5 !== "null" ? `${data.coupons.disclaimer5}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.carrierOffers.coupon5 !== "null" ? `
+                    ${data.coupons.coupon6 !== "null" ? `
                         <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon5}</td>
-                            <td>${data.carrierOffers.disclaimer5 !== "null" ? `${data.carrierOffers.disclaimer5}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon6}</td>
+                            <td>${data.coupons.disclaimer6 !== "null" ? `${data.coupons.disclaimer6}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.carrierOffers.coupon6 !== "null" ? `
+                    ${data.coupons.coupon7 !== "null" ? `
                         <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon6}</td>
-                            <td>${data.carrierOffers.disclaimer6 !== "null" ? `${data.carrierOffers.disclaimer6}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon7}</td>
+                            <td>${data.coupons.disclaimer7 !== "null" ? `${data.coupons.disclaimer7}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.carrierOffers.coupon7 !== "null" ? `
+                    ${data.coupons.coupon8 !== "null" ? `
                         <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon7}</td>
-                            <td>${data.carrierOffers.disclaimer7 !== "null" ? `${data.carrierOffers.disclaimer7}` : `None Entered By Client`}</td>
-                        </tr>`: ``}
-                    ${data.carrierOffers.coupon8 !== "null" ? `
-                        <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon8}</td>
-                            <td>${data.carrierOffers.disclaimer8 !== "null" ? `${data.carrierOffers.disclaimer8}` : `None Entered By Client`}</td>
-                        </tr>`: ``}
-                    ${data.retentionOffers.coupon1 !== "null" ? `
-                        <tr>
-                            <td>(RETENTION OFFER) ${data.retentionOffers.coupon1}</td>
-                            <td>${data.retentionOffers.disclaimer1 !== "null" ? `${data.retentionOffers.disclaimer1}` : `None Entered By Client`}</td>
-                        </tr>`: ``}
-                    ${data.retentionOffers.coupon2 !== "null" ? `
-                        <tr>
-                            <td>(RETENTION OFFER) ${data.retentionOffers.coupon2}</td>
-                            <td>${data.retentionOffers.disclaimer2 !== "null" ? `${data.retentionOffers.disclaimer2}` : `None Entered By Client`}</td>
-                        </tr>`: ``}
-                    ${data.retentionOffers.coupon3 !== "null" ? `
-                        <tr>
-                            <td>(RETENTION OFFER) ${data.retentionOffers.coupon3}</td>
-                            <td>${data.retentionOffers.disclaimer3 !== "null" ? `${data.retentionOffers.disclaimer3}` : `None Entered By Client`}</td>
-                        </tr>`: ``}
-                    ${data.retentionOffers.coupon4 !== "null" ? `
-                        <tr>
-                            <td>(RETENTION OFFER) ${data.retentionOffers.coupon4}</td>
-                            <td>${data.retentionOffers.disclaimer4 !== "null" ? `${data.retentionOffers.disclaimer4}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon8}</td>
+                            <td>${data.coupons.disclaimer8 !== "null" ? `${data.coupons.disclaimer8}` : `None Entered By Client`}</td>
                         </tr>`: ``}
                 </table></p> 
         </body>
@@ -1683,7 +1611,7 @@ app.post("/dental", async (req, res) => {
     // #region dental Receive JSON from Survey Sparrow
     try {
         const data = req.body
-        const company = data.companyName
+        const company = data.practiceName
         const type = "Dental"
         const htmlContent = generateDentalHTML(data)
         const htmlFilePath = path.join(OUTPUT_DIR, 'Dental_Brief.html');
@@ -1724,7 +1652,7 @@ function generateDentalHTML(data) {
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for award or logo photos
-    const awardOrLogoLinks = data.awards
+    const awardOrLogoLinks = data.awardImgs
         .split(",")
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
@@ -1733,35 +1661,14 @@ function generateDentalHTML(data) {
 
 
 
-    const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
+    const phone = `${data.practicePhone.slice(3, 6)}-${data.practicePhone.slice(7, 10)}-${data.practicePhone.slice(11)}`
 
     // counts number of coupons in radiusOffers to then display in the HTML
     function numCoupons() {
         counter = 0
-        for (const key in data.homeownerOffers) {
+        for (const key in data.coupons) {
             if (key.startsWith("coupon")) {
-                if (data.homeownerOffers[key] !== "null") {
-                    counter += 1
-                }
-            }
-        }
-        for (const key in data.radiusOffers) {
-            if (key.startsWith("coupon")) {
-                if (data.radiusOffers[key] !== "null") {
-                    counter += 1
-                }
-            }
-        }
-        for (const key in data.carrierOffers) {
-            if (key.startsWith("coupon")) {
-                if (data.carrierOffers[key] !== "null") {
-                    counter += 1
-                }
-            }
-        }
-        for (const key in data.retentionOffers) {
-            if (key.startsWith("coupon")) {
-                if (data.retentionOffers[key] !== "null") {
+                if (data.coupons[key] !== "null") {
                     counter += 1
                 }
             }
@@ -1769,6 +1676,17 @@ function generateDentalHTML(data) {
         return counter;
     }
 
+
+    const financingMap = {
+        "Smile Now! Pay Later!\\\\n0% Financing": "Smile Now! Pay Later!<br>0% Financing",
+        "No Insurance? No Problem!\\\\nAffordable Dental Coverage for as Low as $XX/ month": "No Insurance? No Problem!<br>Affordable Dental Coverage for as Low as $XX/ month",
+        "No Insurance? No Problem!\\\\nAffordable Dental Coverage!": "No Insurance? No Problem!<br>Affordable Dental Coverage!",
+        "Convenient Financing Options Available.": "Convenient Financing Options Available.",
+        "None of the Above": "None of the Above",
+        "Other": `${data.financing}`
+    }
+
+    const financing = data.financing !== "null" ? financingMap[data.financing] : ``
 
     return `<!DOCTYPE html>
     <html lang="en">
@@ -1787,165 +1705,103 @@ function generateDentalHTML(data) {
             ${data.designReference !== "null" ? `${designRefImg}` : ``}<br>
 
             <h5><u>LOCATION INFORMATION:</u></h5>
-            <p>${data.companyName}</p>
+            <p>${data.practiceName}</p>
+            <p>${data.practiceAddress !== "null" ? `${data.practiceAddress}` : ``} ${data.practiceAddress2 !== "null" ? `${data.practiceAddress2}` : ``} <br>
+            ${data.practiceCity !== "null" ? `${data.practiceCity}` : ``} ${data.practiceState !== "null" ? `${data.practiceState}` : ``} ${data.practiceZip !== "null" ? `${data.practiceZip}` : ``}</p>
             <p>${phone}</p>
-            <p>${data.website}</p>
-            ${data.license !== "null" ? `<p>${data.license}</p>` : ``}
-            ${data.onlineService !== "true" ? `<p>Call Today to Schedule Your Appointment!</p>` : `
-                <p><strong>“Insert Call to Action” Based on Q4</strong></p>
-                <p>OR Call Today or Conveniently Schedule Online!</p>
-                <p>OR Call Today or Conveniently Schedule Online!  (Insert QR Code) Scan Here to Easily Schedule Your Appointment!</p>`}
+            ${data.practiceWebsite !== "null" ? `<p> ${data.practiceWebsite}</p>` : `<p>${data.website}</p>`}
+            <p>Hours:</p>
+            ${data.hours.Monday !== "null" ? `<p>Monday: ${data.hours.Monday}</p>` : ``}
+            ${data.hours.Tuesday !== "null" ? `<p>Tuesday: ${data.hours.Tuesday}</p>` : ``}
+            ${data.hours.Wednesday !== "null" ? `<p>Wednesday: ${data.hours.Wednesday}</p>` : ``}
+            ${data.hours.Thursday !== "null" ? `<p>Thrusday: ${data.hours.Thursday}</p>` : ``}
+            ${data.hours.Friday !== "null" ? `<p>Friday: ${data.hours.Friday}</p>` : ``}
+            ${data.hours.Saturday !== "null" ? `<p>Saturday: ${data.hours.Saturday}</p>` : ``}
+            ${data.hours.Sunday !== "null" ? `<p>Sunday: ${data.hours.Sunday}</p>` : ``}
+            ${data.immediateAppt === "true" ? `<p>Immediate Appointments Available!</p>` : ``}
+            ${data.onlineService === "true" ? `<p>Call Today or Conveniently Book Your Appointment Online!</p>` : ``}
             <br>
             <h5><u>PHOTOS TO USE:</u></h5>
             ${data.photos !== "" ? `${photoLinks}` : ``} <br>
             ${data.otherPhotos !== "" ? `${otherPhotoLinks}` : ``}
             <br>
-            <h5><u>SERVICES:</u></h5>
-            ${data.services.split(",").join("<br>")}
+            <h5><u>TREATMENT / TECHNOLOGY:</u></h5>
+            ${data.technologies !== "null" ? `${data.technologies}` : ``}
+            <br><br>
+            ${data.treatments.split(",").join("<br>")}
             <br>
-            <h5><u>You Can Trust Us to Do the Job for You:</u></h5>
-            <p>${data.pricing}</p>
-            <p>${data.warranties}</p>
-            <p>${data.technicians}</p>
-            <p>${data.financing}</p>
+            <h5><u>INSURANCE:</u></h5>
+            ${data.insurance !== "null" ? `<p>${data.insurance}</p>` : ``}   
+            <br>
+            <h5><u>FINANCING:</u></h5>
+            <p>${financing}</p> 
             <br>
             <h5><u>TAGLINES:</u></h5>
             ${data.hasTaglines === "true" ?
             `${data.customTaglines.tagline1 !== "null" ? `<p>${data.customTaglines.tagline1}</p>` : ``}
                 ${data.customTaglines.tagline2 !== "null" ? `<p>${data.customTaglines.tagline2}</p>` : ``}`
             : ``}
-            ${data.premadeTaglines !== "null" ? `${data.premadeTaglines.split(",").join("<br>")}` : ``}
+            ${data.primaryTagline !== "null" ? `${data.primaryTagline}` : ``}
+            ${data.secondaryTagline !== "null" ? `${data.secondaryTagline}` : ``}
             <br>
-            <h5><u>RATINGS:</u></h5>
+            <h5><u>RATINGS & REVIEWS:</u></h5>
             ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
             ${data.stars.other1 !== "null" ? `<p>${data.stars.other1}</p>` : ``}
             ${data.stars.other2 !== "null" ? `<p>${data.stars.other2}</p>` : ``}
             ${data.stars.other3 !== "null" ? `<p>${data.stars.other3}</p>` : ``}
+            ${data.stars.other4 !== "null" ? `<p>${data.stars.other4}</p>` : ``}
             <br>
             <h5><u>LOGOs to Use:</u></h5> 
             ${!data.logo ? `` : `${logoLinks}<br>`}
-            ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
+            ${!data.awardImgs ? `` : `${awardOrLogoLinks}<br>`}
             ${bbbImageMap[data.bbb] ? `<a href="${bbbImageMap[data.bbb]}" target="_blank"><u><i>View BBB Logo</i></u></a><br>` : ``}
             ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
-            ${data.otherAwards.split(",").join("<br>")}` : ``}
+            ${data.awards.split(",").join("<br>")}` : ``}
+            <br>
+            <h5><u>KIDS & SENIORS:</u></h5> 
+            <p>${data.kidFriendly}</p>
+            ${data.seniorDiscount === "true" ? `<p>Senior Discounts Available</p>` : ``}
             <br>
             <h5><u>OTHER NOTES:</u></h5> 
-            <p>${data.applicables}</p>
             <p>${data.additionalInfo}</p>
-            ${JSON.parse(data.homeOwner) ? `
-                <h6>New Homeowner mailings?</h6> Yes
-                <h6>Homeowners Offers: </h6>
-                <table>
-                    <tr>
-                        <th>Coupon</th>
-                        <th>Disclaimer</th>
-                    </tr>
-                    ${data.homeownerOffers.coupon1 !== "null" ? `
-                    <tr>
-                        <td>${data.homeownerOffers.coupon1}</td>
-                        <td>${data.homeownerOffers.disclaimer1 !== "null" ? `${data.homeownerOffers.disclaimer1}` : `None Entered By Client`}</td>
-                    </tr>`: ``}
-                    ${data.homeownerOffers.coupon2 !== "null" ? `
-                    <tr>
-                        <td>${data.homeownerOffers.coupon2}</td>
-                        <td>${data.homeownerOffers.disclaimer2 !== "null" ? `${data.homeownerOffers.disclaimer2}` : `None Entered By Client`}</td>
-                    </tr>`: ``}
-                </table></p> 
-              
-            ` : ``}
             <br>
             <h5><u>COUPONS(There are ${numCoupons()} coupons):</u></h5>        
-             <table>
+              <table>
                     <tr>
                         <th>Coupon</th>
                         <th>Disclaimer</th>
                     </tr>
-                    ${data.radiusOffers.coupon1 !== "null" ? `
-                    <tr>
-                        <td>(RADIUS OFFER) ${data.radiusOffers.coupon1}</td>
-                        <td>${data.radiusOffers.disclaimer1 !== "null" ? `${data.radiusOffers.disclaimer1}` : `None Entered By Client`}</td>
-                    </tr>`: ``}
-                    ${data.radiusOffers.coupon2 !== "null" ? `
-                    <tr>
-                        <td>(RADIUS OFFER) ${data.radiusOffers.coupon2}</td>
-                        <td>${data.radiusOffers.disclaimer2 !== "null" ? `${data.radiusOffers.disclaimer2}` : `None Entered By Client`}</td>
-                    </tr>`: ``}
-                    ${data.radiusOffers.coupon3 !== "null" ? `
-                    <tr>
-                        <td>(RADIUS OFFER) ${data.radiusOffers.coupon3}</td>
-                        <td>${data.radiusOffers.disclaimer3 !== "null" ? `${data.radiusOffers.disclaimer3}` : `None Entered By Client`}</td>
-                    </tr>`: ``}
-                    ${data.homeownerOffers.coupon1 !== "null" ? `
+                    ${data.coupons.coupon1 !== "null" ? `
                         <tr>
-                            <td>(NEW HOMEOWNER OFFER) ${data.homeownerOffers.coupon1}</td>
-                            <td>${data.homeownerOffers.disclaimer1 !== "null" ? `${data.homeownerOffers.disclaimer1}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon1}</td>
+                            <td>${data.coupons.disclaimer1 !== "null" ? `${data.coupons.disclaimer1}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.homeownerOffers.coupon2 !== "null" ? `
-                    <tr>
-                        <td>(NEW HOMEOWNER OFFER) ${data.homeownerOffers.coupon2}</td>
-                        <td>${data.homeownerOffers.disclaimer2 !== "null" ? `${data.homeownerOffers.disclaimer2}` : `None Entered By Client`}</td>
-                    </tr>`: ``}
-                    ${data.carrierOffers.coupon1 !== "null" ? `
+                    ${data.coupons.coupon2 !== "null" ? `
                         <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon1}</td>
-                            <td>${data.carrierOffers.disclaimer1 !== "null" ? `${data.carrierOffers.disclaimer1}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon2}</td>
+                            <td>${data.coupons.disclaimer2 !== "null" ? `${data.coupons.disclaimer2}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.carrierOffers.coupon2 !== "null" ? `
+                    ${data.coupons.coupon3 !== "null" ? `
                         <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon2}</td>
-                            <td>${data.carrierOffers.disclaimer2 !== "null" ? `${data.carrierOffers.disclaimer2}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon3}</td>
+                            <td>${data.coupons.disclaimer3 !== "null" ? `${data.coupons.disclaimer3}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.carrierOffers.coupon3 !== "null" ? `
+                    ${data.coupons.coupon4 !== "null" ? `
                         <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon3}</td>
-                            <td>${data.carrierOffers.disclaimer3 !== "null" ? `${data.carrierOffers.disclaimer3}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon4}</td>
+                            <td>${data.coupons.disclaimer4 !== "null" ? `${data.coupons.disclaimer4}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.carrierOffers.coupon4 !== "null" ? `
+                    ${data.coupons.coupon5 !== "null" ? `
                         <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon4}</td>
-                            <td>${data.carrierOffers.disclaimer4 !== "null" ? `${data.carrierOffers.disclaimer4}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon5}</td>
+                            <td>${data.coupons.disclaimer5 !== "null" ? `${data.coupons.disclaimer5}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.carrierOffers.coupon5 !== "null" ? `
+                    ${data.coupons.coupon6 !== "null" ? `
                         <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon5}</td>
-                            <td>${data.carrierOffers.disclaimer5 !== "null" ? `${data.carrierOffers.disclaimer5}` : `None Entered By Client`}</td>
+                            <td>${data.coupons.coupon6}</td>
+                            <td>${data.coupons.disclaimer6 !== "null" ? `${data.coupons.disclaimer6}` : `None Entered By Client`}</td>
                         </tr>`: ``}
-                    ${data.carrierOffers.coupon6 !== "null" ? `
-                        <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon6}</td>
-                            <td>${data.carrierOffers.disclaimer6 !== "null" ? `${data.carrierOffers.disclaimer6}` : `None Entered By Client`}</td>
-                        </tr>`: ``}
-                    ${data.carrierOffers.coupon7 !== "null" ? `
-                        <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon7}</td>
-                            <td>${data.carrierOffers.disclaimer7 !== "null" ? `${data.carrierOffers.disclaimer7}` : `None Entered By Client`}</td>
-                        </tr>`: ``}
-                    ${data.carrierOffers.coupon8 !== "null" ? `
-                        <tr>
-                            <td>(CARRIER ROUTE OFFER) ${data.carrierOffers.coupon8}</td>
-                            <td>${data.carrierOffers.disclaimer8 !== "null" ? `${data.carrierOffers.disclaimer8}` : `None Entered By Client`}</td>
-                        </tr>`: ``}
-                    ${data.retentionOffers.coupon1 !== "null" ? `
-                        <tr>
-                            <td>(RETENTION OFFER) ${data.retentionOffers.coupon1}</td>
-                            <td>${data.retentionOffers.disclaimer1 !== "null" ? `${data.retentionOffers.disclaimer1}` : `None Entered By Client`}</td>
-                        </tr>`: ``}
-                    ${data.retentionOffers.coupon2 !== "null" ? `
-                        <tr>
-                            <td>(RETENTION OFFER) ${data.retentionOffers.coupon2}</td>
-                            <td>${data.retentionOffers.disclaimer2 !== "null" ? `${data.retentionOffers.disclaimer2}` : `None Entered By Client`}</td>
-                        </tr>`: ``}
-                    ${data.retentionOffers.coupon3 !== "null" ? `
-                        <tr>
-                            <td>(RETENTION OFFER) ${data.retentionOffers.coupon3}</td>
-                            <td>${data.retentionOffers.disclaimer3 !== "null" ? `${data.retentionOffers.disclaimer3}` : `None Entered By Client`}</td>
-                        </tr>`: ``}
-                    ${data.retentionOffers.coupon4 !== "null" ? `
-                        <tr>
-                            <td>(RETENTION OFFER) ${data.retentionOffers.coupon4}</td>
-                            <td>${data.retentionOffers.disclaimer4 !== "null" ? `${data.retentionOffers.disclaimer4}` : `None Entered By Client`}</td>
-                        </tr>`: ``}
-                </table></p> 
+                </table></p>
         </body>
     </body>
     
