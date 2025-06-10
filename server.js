@@ -1731,7 +1731,7 @@ function generateDentalHTML(data) {
             ${data.treatments.split(",").join("<br>")}
             <br>
             <h5><u>INSURANCE:</u></h5>
-            ${data.insurance !== "null" ? `<p>${data.insurance}</p>` : ``}   
+            ${data.allInsurances !== "null" ? `<p>${data.allInsurances}</p>` : ``}   
             <br>
             <h5><u>FINANCING:</u></h5>
             <p>${financing}</p> 
@@ -1741,8 +1741,8 @@ function generateDentalHTML(data) {
             `${data.customTaglines.tagline1 !== "null" ? `<p>${data.customTaglines.tagline1}</p>` : ``}
                 ${data.customTaglines.tagline2 !== "null" ? `<p>${data.customTaglines.tagline2}</p>` : ``}`
             : ``}
-            ${data.primaryTagline !== "null" ? `${data.primaryTagline}` : ``}
-            ${data.secondaryTagline !== "null" ? `${data.secondaryTagline}` : ``}
+            ${data.primaryTagline !== "null" ? `<p>${data.primaryTagline}</p>` : ``}
+            ${data.secondaryTagline !== "null" ? `<p>${data.secondaryTagline}</p>` : ``}
             <br>
             <h5><u>RATINGS & REVIEWS:</u></h5>
             ${data.stars.google !== "null" ? `<p>Google: ${data.stars.google}</p>` : ``}
