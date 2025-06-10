@@ -1547,7 +1547,7 @@ function generateGeneralHTML(data) {
             ${!data.logo ? `` : `${logoLinks}<br>`}
             <br>
             <h5><u>OTHER NOTES / AWARDS:</u></h5> 
-            <p>${data.additionalInfo}</p>
+            ${data.additionalInfo !== "null" ? `<p>${data.additionalInfo}</p>` : ``}
             ${!data.awards ? `` : `${awardOrLogoLinks}<br>`}
             ${bbbImageMap[data.bbb] ? `<a href="${bbbImageMap[data.bbb]}" target="_blank"><u><i>View BBB Logo</i></u></a><br>` : ``}
             ${data.otherAwards !== "null" ? `<h6>Other Awards, Affiliations, or Organizations:</h6>  
@@ -1763,7 +1763,7 @@ function generateDentalHTML(data) {
             ${data.seniorDiscount === "true" ? `<p>Senior Discounts Available</p>` : ``}
             <br>
             <h5><u>OTHER NOTES:</u></h5> 
-            <p>${data.additionalInfo}</p>
+            ${data.additionalInfo !== "null" ? `<p>${data.additionalInfo}</p>` : ``}
             <br>
             <h5><u>COUPONS(There are ${numCoupons()} coupons):</u></h5>        
               <table>
