@@ -97,7 +97,10 @@ function generateHvacHTML(data) {
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
-    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
+    const designRefImg = data.designReference
+        .split(",")
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Design Reference</i></u></a>`)
+        .join("<br>");
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
@@ -364,8 +367,10 @@ function generateAutoHTML(data) {
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
-    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
-
+    const designRefImg = data.designReference
+        .split(",")
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Design Reference</i></u></a>`)
+        .join("<br>");
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
     const autoTaglines = [
@@ -594,8 +599,10 @@ function generateRoofingHTML(data) {
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
-    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
-
+    const designRefImg = data.designReference
+        .split(",")
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Design Reference</i></u></a>`)
+        .join("<br>");
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
     const roofingTaglines = [
@@ -852,8 +859,10 @@ function generatePlumbingHTML(data) {
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
-    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
-
+    const designRefImg = data.designReference
+        .split(",")
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Design Reference</i></u></a>`)
+        .join("<br>");
 
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
@@ -1158,8 +1167,10 @@ function generateElectricalHTML(data) {
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
-    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
-
+    const designRefImg = data.designReference
+        .split(",")
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Design Reference</i></u></a>`)
+        .join("<br>");
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
     const electricalTaglines = [
@@ -1457,8 +1468,10 @@ function generateGeneralHTML(data) {
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
-    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
-
+    const designRefImg = data.designReference
+        .split(",")
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Design Reference</i></u></a>`)
+        .join("<br>");
     const phone = `${data.companyPhone.slice(3, 6)}-${data.companyPhone.slice(7, 10)}-${data.companyPhone.slice(11)}`
 
     // counts number of coupons in radiusOffers to then display in the HTML
@@ -1657,8 +1670,10 @@ function generateDentalHTML(data) {
         .map(photo => `<a href="${photo}" target="_blank"><u><i>View Award Logo</i></u></a>`)
         .join("<br>");
     // dynamically create "a" tags for design refeerence image if it exists
-    const designRefImg = data.designReference !== "null" ? `<a href="${data.designReference}" target="_blank"><u><i>View Design Reference</i></u></a><br>` : ``;
-
+    const designRefImg = data.designReference
+        .split(",")
+        .map(photo => `<a href="${photo}" target="_blank"><u><i>View Design Reference</i></u></a>`)
+        .join("<br>");
 
 
     const phone = `${data.practicePhone.slice(3, 6)}-${data.practicePhone.slice(7, 10)}-${data.practicePhone.slice(11)}`
